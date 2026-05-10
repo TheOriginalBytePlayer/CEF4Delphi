@@ -6,7 +6,7 @@ uses
   {$ENDIF }
   FMX.Forms,
   FMX.Types,
-  FMX.Skia,     // This unit comes from the Skia4Delphi project
+  FMX.Skia,
   uCEFApplication,
   uCEFFMXWorkScheduler,
   uMainForm in 'uMainForm.pas' {MainForm},
@@ -33,7 +33,7 @@ begin
     begin
       Application.Initialize;
       Application.CreateForm(TMainForm, MainForm);
-      Application.Run;
+  Application.Run;
 
       // The form needs to be destroyed *BEFORE* stopping the scheduler.
       MainForm.Free;

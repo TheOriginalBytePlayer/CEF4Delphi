@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF MSWINDOWS}Winapi.Messages, Winapi.Windows,{$ENDIF}
-  System.Types, System.UITypes, System.Classes, System.SyncObjs,
+  System.Types, System.UITypes, System.Classes, System.SyncObjs, uCefSchemeRegistrar,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Edit, FMX.StdCtrls, System.JSON,
   FMX.Controls.Presentation, FMX.ComboEdit, {$IFDEF DELPHI17_UP}FMX.Graphics,{$ENDIF}
   uCEFFMXChromium, uCEFFMXBufferPanel, uCEFFMXWorkScheduler,uCEFv8Handler,
@@ -247,6 +247,17 @@ begin
   end;
 end;
 
+
+procedure GlobalCEFApp_OnRegCustomSchemes(const registrar: TCefSchemeRegistrarRef);
+  var Options:TCEFSchemeOptions;
+begin
+  Options := CEF_SCHEME_OPTION_STANDARD or
+               CEF_SCHEME_OPTION_SECURE or
+               CEF_SCHEME_OPTION_CORS_ENABLED;
+  // Register 'app-img' as a standard, secure scheme
+  registrar.AddCustomScheme('app-img',Options);
+end;
+
 procedure CreateGlobalCEFApp;
 begin
   GlobalCEFApp                            := TCefApplication.Create;
@@ -256,6 +267,8 @@ begin
   GlobalCEFApp.EnableGPU                  := True;
   GlobalCEFApp.BrowserSubprocessPath      := 'FMXSkiaBrowser_sp.exe';
   GlobalCEFApp.OnScheduleMessagePumpWork  := GlobalCEFApp_OnScheduleMessagePumpWork;
+  GlobalCEFApp.OnRegCustomSchemes         := GlobalCEFApp_OnRegCustomSchemes;
+
   {$IFDEF DEBUG}
   //GlobalCEFApp.LogFile                    := 'debug.log';
   //GlobalCEFApp.LogSeverity                := LOGSEVERITY_INFO;
@@ -284,6 +297,33 @@ end;
 
 function TImageSchemeHandler.ProcessRequest(const request: ICefRequest; const callback: ICefCallback): Boolean;
 var
+  URL, ImageID: string;
+begin
+  Result := False;
+  URL := request.Url;
+
+  // Extract your ID from the URL (e.g., app-img://db/123)
+  ImageID := Copy(URL, LastDelimiter('/', URL) + 1, Length(URL));
+
+  try
+    FStream.Clear;
+    // Perform file I/O directly on the IO Thread (No Synchronize!)
+    FStream.LoadFromFile('C:\Users\kens\OneDrive\Personal Photos\Pictures\Annika 7th Grade Class Photo (smaller).jpg');
+    FStream.Position := 0;
+
+    Result := (FStream.Size > 0);
+  except
+    Result := False;
+  end;
+
+  if Result then
+    callback.Cont // Tell Chromium the data is ready
+  else
+    callback.Cancel; // Tell Chromium the request failed
+end;
+(*
+function TImageSchemeHandler.ProcessRequest(const request: ICefRequest; const callback: ICefCallback): Boolean;
+var
   URL: string;
   ImageID: string;
 begin
@@ -297,8 +337,6 @@ begin
   FStream.Clear;
   // Note: Scheme handlers run on an IO Thread.
   // Ensure your Database access is thread-safe!
-  TThread.Synchronize(nil, procedure
-    begin
       FStream.LoadFromFile('C:\Users\kens\OneDrive\Personal Photos\Pictures\Annika 7th Grade Class Photo (smaller).jpg');
       FStream.Position := 0;
 
@@ -314,7 +352,6 @@ begin
         FStream.Position := 0;
         Result := True;
       end;}
-    end);
 
   Result:=FStream.Size > 0;
   if Result then
@@ -322,7 +359,7 @@ begin
   else
     callback.Cancel;  // Fail the request
 end;
-
+*)
 
 function TImageSchemeHandler.ReadResponse(const data_out: Pointer; bytes_to_read: Integer; var bytes_read: Integer; const callback: ICefCallback): Boolean;
 begin
