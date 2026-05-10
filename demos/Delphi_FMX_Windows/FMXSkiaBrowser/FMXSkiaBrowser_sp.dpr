@@ -1,7 +1,8 @@
 program FMXSkiaBrowser_sp;
 
 uses
-  uFMXSkiaBrowser_sp in 'uFMXSkiaBrowser_sp.pas';
+  uFMXSkiaBrowser_sp in 'uFMXSkiaBrowser_sp.pas',
+  uMyRenderProcess in 'uMyRenderProcess.pas';
 
 {$R *.res}
 

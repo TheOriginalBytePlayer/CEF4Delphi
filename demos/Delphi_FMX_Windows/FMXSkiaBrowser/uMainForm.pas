@@ -7,12 +7,12 @@ interface
 uses
   {$IFDEF MSWINDOWS}Winapi.Messages, Winapi.Windows,{$ENDIF}
   System.Types, System.UITypes, System.Classes, System.SyncObjs,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Edit, FMX.StdCtrls,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Edit, FMX.StdCtrls, System.JSON,
   FMX.Controls.Presentation, FMX.ComboEdit, {$IFDEF DELPHI17_UP}FMX.Graphics,{$ENDIF}
-  uCEFFMXChromium, uCEFFMXBufferPanel, uCEFFMXWorkScheduler,
-  uCEFInterfaces, uCEFTypes, uCEFConstants, uCEFChromiumCore,
+  uCEFFMXChromium, uCEFFMXBufferPanel, uCEFFMXWorkScheduler,uCEFv8Handler,
+  uCEFInterfaces, uCEFTypes, uCEFConstants, uCEFChromiumCore,uCefResourceHandler,
   // The following units come from the Skia4Delphi project
-  Skia, FMX.Skia;
+  Skia, FMX.Skia, FMX.Memo.Types, FMX.ScrollBox, FMX.Memo, system.NetEncoding;
 
 
 type
@@ -24,6 +24,7 @@ type
     AddressCb: TComboEdit;
     SkPaintBox1: TSkPaintBox;
     Panel1: TPanel;
+    Memo1: TMemo;
 
     procedure GoBtnClick(Sender: TObject);
     procedure GoBtnEnter(Sender: TObject);
@@ -61,6 +62,18 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure AddressEdtEnter(Sender: TObject);
     procedure SkPaintBox1Draw(ASender: TObject; const ACanvas: ISkCanvas; const ADest: TRectF; const AOpacity: Single);
+    procedure chrmosrConsoleMessage(Sender: TObject; const browser: ICefBrowser;
+      level: TCefLogSeverity; const message_, source: ustring; line: Integer;
+      out Result: Boolean);
+    procedure chrmosrChromeCommand(Sender: TObject; const browser: ICefBrowser;
+      command_id: Integer; disposition: TCefWindowOpenDisposition;
+      var aResult: Boolean);
+    procedure chrmosrProcessMessageReceived(Sender: TObject;
+      const browser: ICefBrowser; const frame: ICefFrame;
+      sourceProcess: TCefProcessId; const message: ICefProcessMessage;
+      out Result: Boolean);
+  private
+    function GetSQLiteDataAsJSON(const ASQL: string): string;
 
   protected
     FPopUpBitmap       : TBitmap;
@@ -156,12 +169,82 @@ implementation
 
 uses
   System.SysUtils, System.Math, FMX.Platform, FMX.Platform.Win, FMX.Helpers.Win,
-  uCEFMiscFunctions, uCEFApplication, uFMXApplicationService;
+  uCEFMiscFunctions, uCEFApplication, uFMXApplicationService, uCEFv8Value,
+  uCEFProcessMessage,UCefSchemeHandlerFactory;
 
 procedure GlobalCEFApp_OnScheduleMessagePumpWork(const aDelayMS : int64);
 begin
   if (GlobalFMXWorkScheduler <> nil) then
     GlobalFMXWorkScheduler.ScheduleMessagePumpWork(aDelayMS);
+end;
+
+{kjs START}
+type
+  TMyBridgeHandler = class(TCefV8HandlerOwn)
+  private
+    FFrame: ICefFrame; // Store the frame to communicate back
+  protected
+    function Execute(const name: ustring; const obj: ICefV8Value; const arguments: TCefV8ValueArray; var retval: ICefV8Value; var exception: ustring): Boolean; override;
+  public
+    constructor Create(const aFrame: ICefFrame);
+  end;
+
+  type
+  TImageSchemeHandler = class(TCefResourceHandlerOwn)
+  private
+    FStream: TMemoryStream;
+  protected
+    function ProcessRequest(const request: ICefRequest; const callback: ICefCallback): Boolean; override; // deprecated
+    procedure GetResponseHeaders(const response: ICefResponse; out responseLength: Int64; out redirectUrl: ustring); override;
+    function ReadResponse(const data_out: Pointer; bytes_to_read: Integer; var bytes_read: Integer; const callback: ICefCallback): Boolean; override;
+  public
+    constructor Create(const browser: ICefBrowser; const frame: ICefFrame; const schemeName: ustring; const request: ICefRequest); override;
+    destructor Destroy; override;
+  end;
+
+constructor TImageSchemeHandler.Create(const browser: ICefBrowser; const frame: ICefFrame; const schemeName: ustring; const request: ICefRequest);
+begin
+  inherited;
+  FStream := TMemoryStream.Create;
+end;
+
+procedure TMainForm.chrmosrAfterCreated(Sender: TObject; const browser: ICefBrowser);
+begin
+  // Now the browser is fully initialized we can enable the UI.
+  Caption := 'FMX Skia Browser';
+  // Register the factory for the 'app-img' scheme
+  CefRegisterSchemeHandlerFactory('app-img', '', TImageSchemeHandler);
+end;
+
+
+constructor TMyBridgeHandler.Create(const aFrame: ICefFrame);
+begin
+  inherited Create;
+  FFrame := aFrame;
+end;
+
+function TMyBridgeHandler.Execute(const name: ustring; const obj: ICefV8Value;
+  const arguments: TCefV8ValueArray; var retval: ICefV8Value; var exception: ustring): Boolean;
+var
+  msg: ICefProcessMessage;
+begin
+  Result := False;
+
+  if (name = 'query') then
+  begin
+    if (Length(arguments) > 0) and (arguments[0].IsString) then
+    begin
+      msg := TCefProcessMessageRef.New('ExecuteQuery');
+      msg.ArgumentList.SetString(0, arguments[0].GetStringValue);
+
+      // Use the frame reference we captured during creation
+      if (FFrame <> nil) and (FFrame.IsValid) then
+      begin
+        FFrame.SendProcessMessage(PID_BROWSER, msg);
+        Result := True;
+      end;
+    end;
+  end;
 end;
 
 procedure CreateGlobalCEFApp;
@@ -184,6 +267,70 @@ begin
   // GlobalCEFApp.StartMainProcess call.
   GlobalFMXWorkScheduler := TFMXWorkScheduler.Create(nil);
 end;
+
+destructor TImageSchemeHandler.Destroy;
+begin
+  FStream.Free;
+  inherited;
+end;
+
+
+procedure TImageSchemeHandler.GetResponseHeaders(const response: ICefResponse; out responseLength: Int64; out redirectUrl: ustring);
+begin
+  response.MimeType := 'image/jpeg'; // or detect from DB
+  response.Status := 200;
+  responseLength := FStream.Size;
+end;
+
+function TImageSchemeHandler.ProcessRequest(const request: ICefRequest; const callback: ICefCallback): Boolean;
+var
+  URL: string;
+  ImageID: string;
+begin
+  Result := False;
+  URL := request.Url;
+
+  // Example URL: app-img://db/123
+  // Extracting the ID from the end of the URL
+  ImageID := Copy(URL, LastDelimiter('/', URL) + 1, Length(URL));
+
+  FStream.Clear;
+  // Note: Scheme handlers run on an IO Thread.
+  // Ensure your Database access is thread-safe!
+  TThread.Synchronize(nil, procedure
+    begin
+      FStream.LoadFromFile('C:\Users\kens\OneDrive\Personal Photos\Pictures\Annika 7th Grade Class Photo (smaller).jpg');
+      FStream.Position := 0;
+
+      {*
+      MainForm.FDQuery1.SQL.Text := 'SELECT image_blob FROM images WHERE id = :id';
+      MainForm.FDQuery1.ParamByName('id').AsString := ImageID;
+      MainForm.FDQuery1.Open;
+
+      if not MainForm.FDQuery1.Eof then
+      begin
+        FStream.Clear;
+        TBlobField(MainForm.FDQuery1.FieldByName('image_blob')).SaveToStream(FStream);
+        FStream.Position := 0;
+        Result := True;
+      end;}
+    end);
+
+  Result:=FStream.Size > 0;
+  if Result then
+    callback.Cont // Move to GetResponseHeaders
+  else
+    callback.Cancel;  // Fail the request
+end;
+
+
+function TImageSchemeHandler.ReadResponse(const data_out: Pointer; bytes_to_read: Integer; var bytes_read: Integer; const callback: ICefCallback): Boolean;
+begin
+  bytes_read := FStream.Read(data_out^, bytes_to_read);
+  Result := (bytes_read > 0);
+end;
+
+{KJS END}
 
 procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
@@ -457,11 +604,6 @@ begin
   chrmosr.SetFocus(False);
 end;
 
-procedure TMainForm.chrmosrAfterCreated(Sender: TObject; const browser: ICefBrowser);
-begin
-  // Now the browser is fully initialized we can enable the UI.
-  Caption := 'FMX Skia Browser';
-end;
 
 procedure TMainForm.chrmosrBeforeClose(Sender: TObject; const browser: ICefBrowser);
 begin
@@ -507,6 +649,20 @@ begin
     chrmosr.SetFocus(True)
    else
     Panel1.SetFocus;
+end;
+
+procedure TMainForm.chrmosrChromeCommand(Sender: TObject;
+  const browser: ICefBrowser; command_id: Integer;
+  disposition: TCefWindowOpenDisposition; var aResult: Boolean);
+begin
+  memo1.lines.add('Got command');
+end;
+
+procedure TMainForm.chrmosrConsoleMessage(Sender: TObject;
+  const browser: ICefBrowser; level: TCefLogSeverity; const message_,
+  source: ustring; line: Integer; out Result: Boolean);
+begin
+     Memo1.Lines.Add(message_+':'+Source+' at line #'+Inttostr(line));
 end;
 
 procedure TMainForm.chrmosrCursorChange(      Sender           : TObject;
@@ -634,6 +790,111 @@ begin
       FPopUpRect.Right  := rect.x + rect.width  - 1;
       FPopUpRect.Bottom := rect.y + rect.height - 1;
     end;
+end;
+
+function TMainForm.GetSQLiteDataAsJSON(const ASQL: string): string;
+var
+  JSONArray: TJSONArray;
+  JSONObject: TJSONObject;
+begin
+  JSONArray := TJSONArray.Create;
+  try
+    //
+      JSONObject := TJSONObject.Create;
+      JSONObject.AddPair('First Name',TJSONString.Create('Ken'));
+      JSONObject.AddPair('Last Name',TJSONString.Create('Schafer'));
+      JSONObject.AddPair('img-url','app-img://load/123');
+      JSONArray.AddElement(JSONObject);
+      JSONObject := TJSONObject.Create;
+      JSONObject.AddPair('First Name',TJSONString.Create('Greg'));
+      JSONObject.AddPair('Last Name',TJSONString.Create('Formaldy'));
+      JSONObject.AddPair('img-url','app-img://load/123');
+      JSONArray.AddElement(JSONObject);
+
+{    FDQuery1.SQL.Text := ASQL;
+    FDQuery1.Open;
+
+    while not FDQuery1.Eof do
+    begin
+      JSONObject := TJSONObject.Create;
+      for var i := 0 to FDQuery1.FieldCount - 1 do
+      begin
+        JSONObject.AddPair(FDQuery1.Fields[i].FieldName,
+                           TJSONString.Create(FDQuery1.Fields[i].AsString));
+      end;
+      JSONArray.AddElement(JSONObject);
+      FDQuery1.Next;
+    end;
+}
+    Result := JSONArray.ToJSON;
+  finally
+    JSONArray.Free;
+  end;
+end;
+
+{*
+function TMainForm.GetSQLiteDataAsJSON(const ASQL: string): string;
+var
+  JSONArray: TJSONArray;
+  JSONObject: TJSONObject;
+  InStream: TStream;
+begin
+  JSONArray := TJSONArray.Create;
+  try
+    FDQuery1.Open(ASQL);
+    while not FDQuery1.Eof do
+    begin
+      JSONObject := TJSONObject.Create;
+      for var i := 0 to FDQuery1.FieldCount - 1 do
+      begin
+        if FDQuery1.Fields[i].IsBlob then
+        begin
+          InStream := FDQuery1.CreateBlobStream(FDQuery1.Fields[i], bmRead);
+          try
+            // Convert to Base64
+            var Base64Str := TNetEncoding.Base64.EncodeBytesToString(
+              TMemoryStream(InStream).Memory, InStream.Size);
+            JSONObject.AddPair(FDQuery1.Fields[i].FieldName, Base64Str);
+          finally
+            InStream.Free;
+          end;
+        end
+        else
+          JSONObject.AddPair(FDQuery1.Fields[i].FieldName, FDQuery1.Fields[i].AsString);
+      end;
+      JSONArray.AddElement(JSONObject);
+      FDQuery1.Next;
+    end;
+    Result := JSONArray.ToJSON;
+  finally
+    JSONArray.Free;
+  end;
+end;
+*}
+
+procedure TMainForm.chrmosrProcessMessageReceived(Sender: TObject;
+  const browser: ICefBrowser; const frame: ICefFrame;
+  sourceProcess: TCefProcessId; const message: ICefProcessMessage;
+  out Result: Boolean);
+begin
+// 1. Check if the message is the one from our Bridge
+  if (message.Name = 'ExecuteQuery') then
+  begin
+    // 2. Extract the SQL string from the first argument
+    VAR SQL := message.ArgumentList.GetString(0);
+
+    // 3. Execute the SQL (Vanilla FireDAC or your DB layer)
+    // NOTE: This runs in the CEF thread.
+    var JSONData := GetSQLiteDataAsJSON(SQL);
+
+    // 4. Create the reply message
+    var Reply := TCefProcessMessageRef.New('QueryResults');
+    Reply.ArgumentList.SetString(0, JSONData);
+
+    // 5. Send it back to the RENDERER (where the JS lives)
+    frame.SendProcessMessage(PID_RENDERER, Reply);
+    Result := True;
+  end;
 end;
 
 procedure TMainForm.chrmosrTooltip(      Sender  : TObject;
@@ -1033,5 +1294,6 @@ begin
   chrmosr.SendTouchEvent(@TempTouchEvent);
 end;
 {$ENDIF}
+
 
 end.
