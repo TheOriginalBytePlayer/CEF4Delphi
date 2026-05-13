@@ -1,4 +1,4 @@
-unit uFMXApplicationService;
+unit uFMXApplicationServiceToComponent;
 
 {$I ..\..\..\source\cef.inc}
 

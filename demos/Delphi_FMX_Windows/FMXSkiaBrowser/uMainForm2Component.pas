@@ -1,4 +1,4 @@
-unit uMainForm;
+unit uMainForm2Component;
 
 {$I ..\..\..\source\cef.inc}
 
@@ -21,6 +21,7 @@ type
     ChromiumEngine: TFMXChromium;
     ChromiumPanel: TPanel;
     RenderScreen: TSkPaintBox;
+    procedure GoBtnEnter(Sender: TObject);
 
     procedure ChromiumPanelEnter(Sender: TObject);
     procedure ChromiumPanelExit(Sender: TObject);
@@ -142,11 +143,11 @@ var
 
 // This is the destruction sequence in OSR mode :
 // 1- FormCloseQuery sets CanClose to the initial FCanClose value (False) and
-//    calls chrmosr.CloseBrowser(True).
-// 2- chrmosr.CloseBrowser(True) will trigger chrmosr.OnClose and the default
+//    calls ChromiumEngine.CloseBrowser(True).
+// 2- ChromiumEngine.CloseBrowser(True) will trigger ChromiumEngine.OnClose and the default
 //    implementation will destroy the internal browser immediately, which will
-//    trigger the chrmosr.OnBeforeClose event.
-// 3- chrmosr.OnBeforeClose sets FCanClose to True and closes the form.
+//    trigger the ChromiumEngine.OnBeforeClose event.
+// 3- ChromiumEngine.OnBeforeClose sets FCanClose to True and closes the form.
 
 procedure CreateGlobalCEFApp;
 
@@ -155,8 +156,8 @@ implementation
 {$R *.fmx}
 
 uses
-  System.SysUtils, System.Math, FMX.Platform, FMX.Platform.Win, FMX.Helpers.Win,
-  uCEFMiscFunctions, uCEFApplication, uFMXApplicationService, uCEFv8Value,
+  System.SysUtils, System.Math, FMX.Platform{$IFDEF MSWINDOWS}, FMX.Platform.Win, FMX.Helpers.Win,{$ENDIF}
+  uCEFMiscFunctions, uCEFApplication, uCEFv8Value, ChromiumAppSupport,
   uCEFProcessMessage,UCefSchemeHandlerFactory;
 
 procedure GlobalCEFApp_OnScheduleMessagePumpWork(const aDelayMS : int64);
@@ -193,14 +194,6 @@ constructor TImageSchemeHandler.Create(const browser: ICefBrowser; const frame: 
 begin
   inherited;
   FStream := TMemoryStream.Create;
-end;
-
-procedure TMainForm.ChromiumEngineAfterCreated(Sender: TObject; const browser: ICefBrowser);
-begin
-  // Now the browser is fully initialized we can enable the UI.
-  Caption := 'FMX Skia Browser';
-  // Register the factory for the 'app-img' scheme
-  CefRegisterSchemeHandlerFactory('app-img', '', TImageSchemeHandler);
 end;
 
 
@@ -308,6 +301,7 @@ begin
   else
     callback.Cancel; // Tell Chromium the request failed
 end;
+
 function TImageSchemeHandler.ReadResponse(const data_out: Pointer; bytes_to_read: Integer; var bytes_read: Integer; const callback: ICefCallback): Boolean;
 begin
   bytes_read := FStream.Read(data_out^, bytes_to_read);
@@ -364,8 +358,8 @@ end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
-  if (FPopUpBitmap <> nil) then FreeAndNil(FPopUpBitmap);
-
+  if (FPopUpBitmap <> nil) then
+    FreeAndNil(FPopUpBitmap);
   FImage      := nil;
   FPopupImage := nil;
 end;
@@ -410,6 +404,19 @@ begin
   TempPointF := Platform.GetMousePos;
   Result     := True;
   {$ENDIF}
+end;
+
+procedure TMainForm.GoBtnEnter(Sender: TObject);
+begin
+  ChromiumEngine.SetFocus(False);
+end;
+
+procedure TMainForm.ChromiumEngineAfterCreated(Sender: TObject; const browser: ICefBrowser);
+begin
+  // Now the browser is fully initialized we can enable the UI.
+  Caption := 'FMX Skia Browser';
+  // Register the factory for the 'app-img' scheme
+  CefRegisterSchemeHandlerFactory('app-img', '', TImageSchemeHandler);
 end;
 
 procedure TMainForm.ChromiumPanelEnter(Sender: TObject);

@@ -1,16 +1,16 @@
-program FMXSkiaBrowser;
+program FMXSkiaBrowserToComponent;
 
 uses
   {$IFDEF DELPHI17_UP}
   System.StartUpCopy,
   {$ENDIF }
-  FMX.forms,// in 'c:\program files (x86)\embarcadero\studio\37.0\source\fmx\FMX.Forms.pas',
+  FMX.forms,
   FMX.Types,
   FMX.Skia,
   uCEFApplication,
   uCEFFMXWorkScheduler,
-  uMainForm in 'uMainForm.pas' {MainForm},
-  uFMXApplicationService in 'uFMXApplicationService.pas';
+  uMainForm2Component in 'uMainForm2Component.pas' {MainForm},
+  ChromiumAppSupport in 'D:\Applications\FrameForge Version 5\V5 Components\AIVersion\ChromiumAppSupport.pas';
 
 {$R *.res}
 
@@ -33,7 +33,7 @@ begin
     begin
       Application.Initialize;
       Application.CreateForm(TMainForm, MainForm);
-      Application.Run;
+  Application.Run;
 
       // The form needs to be destroyed *BEFORE* stopping the scheduler.
       MainForm.Free;

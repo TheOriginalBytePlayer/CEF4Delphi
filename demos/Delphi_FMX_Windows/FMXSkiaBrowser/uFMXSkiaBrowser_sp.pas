@@ -16,7 +16,7 @@ uses
 
 implementation
 
-uses uCEFv8Value;
+uses uCEFv8Value, System.SysUtils, FMX.Dialogs;
 
 function TMyCustomSubProcessApp.GetMustCreateRenderProcessHandler: boolean;
 begin
@@ -31,14 +31,14 @@ begin
   GlobalCEFApp.WindowlessRenderingEnabled := True;
   GlobalCEFApp.ExternalMessagePump        := True;
   GlobalCEFApp.MultiThreadedMessageLoop   := False;
-  GlobalCEFApp.EnableGPU                  := True;
+  GlobalCEFApp.EnableGPU                  := true;
   GlobalCEFApp.EnableSpeechInput          := True;
   GlobalCEFApp.OnContextCreated          := GlobalOnContextCreated;
   GlobalCEFApp.OnProcessMessageReceived  := GlobalOnProcessMessageReceived;
   GlobalCEFApp.OnRegCustomSchemes         := GlobalCEFApp_OnRegCustomSchemes;
   {$IFDEF DEBUG}
-  //GlobalCEFApp.LogFile                    := 'debug.log';
-  //GlobalCEFApp.LogSeverity                := LOGSEVERITY_INFO;
+  GlobalCEFApp.LogFile                    := 'debug.log';
+  GlobalCEFApp.LogSeverity                := LOGSEVERITY_VERBOSE;
   {$ENDIF}
 
 

@@ -1,6 +1,7 @@
 program FMXSkiaBrowser_sp;
 
 uses
+  FMX.forms in 'c:\program files (x86)\embarcadero\studio\37.0\source\fmx\FMX.Forms.pas',
   uFMXSkiaBrowser_sp in 'uFMXSkiaBrowser_sp.pas',
   uMyRenderProcess in 'uMyRenderProcess.pas';
 

@@ -80,3 +80,6 @@ bin/*.bin
 bin/*.dat
 demos/FMXExternalPumpBrowser/FMXExternalPumpBrowser.res
 
+/bin/bin-64/cef_binary_147.0.10+gd58e84d+chromium-147.0.7727.118_windows64
+/bin/bin-64/Release
+/bin

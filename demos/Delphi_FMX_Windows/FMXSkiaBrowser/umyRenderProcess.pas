@@ -25,9 +25,13 @@ type
 implementation
 
 uses
-  uCEFConstants,uFMXApplicationService;
+  uCEFConstants,uFMXApplicationService, system.SysUtils;
 
 procedure GlobalOnProcessMessageReceived(const browser: ICefBrowser; const frame: ICefFrame; sourceProcess: TCefProcessId; const message: ICefProcessMessage; var aHandled : boolean);
+var
+  apiMethod, paramJSON: string;
+  jsResult: ICefV8Value;
+  arg: ICefV8Value;
 begin
   if (message.Name = 'QueryResults') then
   begin
@@ -40,9 +44,59 @@ begin
 
       if (onResultFunc <> nil) and onResultFunc.IsFunction then
       begin
-         var arg := TCefV8ValueRef.NewString(jsonStr);
+         arg := TCefV8ValueRef.NewString(jsonStr);
          onResultFunc.ExecuteFunction(nil, [arg]);
          aHandled := True;
+      end;
+    finally
+      context.Exit;
+    end;
+  end
+ else
+  if (message.Name = 'CallFrameForgeAPI') then
+  begin
+    apiMethod := message.ArgumentList.GetString(0); // e.g., 'isLoggedIn'
+
+    if message.ArgumentList.GetSize > 1 then
+       paramJSON := message.ArgumentList.GetString(1)
+    else
+       ParamJSON:=''; // e.g., '{"userName":"ken"}'
+
+    var context := frame.GetV8Context;
+    if (context <> nil) and context.Enter then
+    try
+      var global := context.GetGlobal;
+      var apiObj := global.GetValueByKey('FrameForgeAPI');
+
+      if (apiObj <> nil) and apiObj.IsObject then
+      begin
+        var jsFunc := apiObj.GetValueByKey(apiMethod);
+        if (jsFunc <> nil) and jsFunc.IsFunction then
+        begin
+          // Convert the JSON string from Delphi into a real V8 Object
+          // We use the built-in JSON.parse within the V8 context
+          var jsonParser := global.GetValueByKey('JSON').GetValueByKey('parse');
+          if ParamJSon <> '' then
+           begin
+             arg := jsonParser.ExecuteFunction(nil, [TCefV8ValueRef.NewString(paramJSON)]);
+          // Execute: window.FrameForgeAPI.isLoggedIn({'userName':'ken'})
+            jsResult := jsFunc.ExecuteFunction(nil, [arg])
+           end
+          else //Execute the JS function: window.FrameForgeAPI.isLoggedIn()
+           jsResult := jsFunc.ExecuteFunction(nil, []);
+
+          // Reply logic remains the same
+          var reply := TCefProcessMessageRef.New('FrameForgeAPIResult');
+          reply.ArgumentList.SetString(0, apiMethod);
+
+          if jsResult.IsBool then
+            reply.ArgumentList.SetString(1, BoolToStr(jsResult.GetBoolValue, True))
+          else
+            reply.ArgumentList.SetString(1, jsResult.GetStringValue);
+
+          frame.SendProcessMessage(PID_BROWSER, reply);
+          aHandled := True;
+        end;
       end;
     finally
       context.Exit;
