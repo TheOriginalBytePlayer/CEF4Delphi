@@ -2211,6 +2211,10 @@ type
     /// Creates a new document picture-in-picture window showing a child WebView.
     /// </summary>
     CEF_WOD_NEW_PICTURE_IN_PICTURE,
+    /// <summary>
+    /// Opens a link in a split view alongside the current tab.
+    /// </summary>
+    CEF_WOD_NEW_SPLIT_VIEW,
 
     CEF_WOD_NUM_VALUES
   );
@@ -2569,6 +2573,17 @@ type
     CEF_CHANNEL_LAYOUT_1_1,
     /// <summary>Front L, Front R, LFE, Back C</summary>
     CEF_CHANNEL_LAYOUT_3_1_BACK,
+    /// <summary>
+    /// Front L, Front R, Front C, LFE, Side L, Side R,
+    /// Top Front L, Top Front R, Top Back L, Top Back R
+    /// </summary>
+    CEF_CHANNEL_LAYOUT_5_1_4,
+    /// <summary>
+    /// Front L, Front R, Front C, LFE, Back L, Back R, Side L, Side R,
+    /// Top Front L, Top Front R, Top Back L, Top Back R
+    /// </summary>
+    CEF_CHANNEL_LAYOUT_7_1_4,
+
     CEF_CHANNEL_NUM_VALUES
   );
 
@@ -3438,7 +3453,7 @@ type
   /// </remarks>
   TCefChromePageActionIconType = (
     CEF_CPAIT_BOOKMARK_STAR,
-    CEF_CPAIT_CLICK_TO_CALL_DEPRECATED,
+    CEF_CPAIT_CLICK_TO_CALL,
     CEF_CPAIT_COOKIE_CONTROLS,
     CEF_CPAIT_FILE_SYSTEM_ACCESS,
     CEF_CPAIT_FIND,
@@ -3478,8 +3493,12 @@ type
     CEF_CPAIT_JS_OPTIMIZATIONS,        {* CEF_API_ADDED(14400) *}
     CEF_CPAIT_RECORD_REPLAY,           {* CEF_API_ADDED(14700) *}
     CEF_CPAIT_INDIGO,                  {* CEF_API_ADDED(14700) *}
-    CEF_CPAIT_FEDERATION_DEPRECATED,   {* CEF_API_ADDED(CEF_EXPERIMENTAL) *}
-    CEF_CPAIT_GLIC,                    {* CEF_API_ADDED(CEF_EXPERIMENTAL) *}
+    CEF_CPAIT_FEDERATION,              {* CEF_API_ADDED(14800) *}
+    CEF_CPAIT_GLIC,                    {* CEF_API_ADDED(14800) *}
+    CEF_CPAIT_ANCHORED_CONTEXTUAL_CUE, {* CEF_API_ADDED(14900) *}
+    CEF_CPAIT_WEB_AUTHN_AMBIENT_SIGNIN,{* CEF_API_ADDED(14900) *}
+    CEF_CPAIT_AUTOFILL_PAYMENT,        {* CEF_API_ADDED(15000) *}
+    CEF_CPAIT_MULTISTEP_FILTER,        {* CEF_API_ADDED(15000) *}
     CEF_CPAIT_NUM_VALUES
   );
 
@@ -5570,13 +5589,13 @@ type
     /// Content Setting for temporary 3PC accesses granted by user behavior
     /// heuristics.
     /// </summary>
-    CEF_CONTENT_SETTING_TYPE_TPCD_HEURISTICS_GRANTS,
+    CEF_CONTENT_SETTING_TYPE_TPCD_HEURISTICS_GRANTS_DEPRECATED,                  {* CEF_API_ADDED(14900) *}
     /// <summary>
     /// Content Setting for 3PC accesses granted by metadata delivered via the
     /// component updater service. This type will only be used when
     /// `net::features::kTpcdMetadataGrants` is enabled.
     /// </summary>
-    CEF_CONTENT_SETTING_TYPE_TPCD_METADATA_GRANTS,
+    CEF_CONTENT_SETTING_TYPE_TPCD_METADATA_GRANTS_DEPRECATED,                    {* CEF_API_ADDED(14900) *}
     /// <summary>
     /// Content Setting for 3PC accesses granted via 3PC deprecation trial.
     /// </summary>
@@ -5785,6 +5804,11 @@ type
     /// requests. Split from LOCAL_NETWORK_ACCESS.
     /// </summary>
     CEF_CONTENT_SETTING_TYPE_LOOPBACK_NETWORK,                                   {* CEF_API_ADDED(14500) *}
+    /// <summary>
+    /// Content setting for whether an IWA can add sub apps without prompting
+    /// users.
+    /// </summary>
+    CEF_CONTENT_SETTING_TYPE_SUB_APPS_WITHOUT_PROMPTS,                           {* CEF_API_ADDED(15000) *}
     CEF_CONTENT_SETTING_TYPE_NUM_VALUES
   );
 
@@ -9132,38 +9156,38 @@ type
   /// <para><see href="https://bitbucket.org/chromiumembedded/cef/src/master/include/capi/views/cef_textfield_capi.h">CEF source file: /include/capi/views/cef_textfield_capi.h (cef_textfield_t)</see></para>
   /// </remarks>
   TCefTextfield = record
-    base                           : TCefView;
-    set_password_input             : procedure(self: PCefTextfield; password_input: Integer); stdcall;
-    is_password_input              : function(self: PCefTextfield): Integer; stdcall;
-    set_read_only                  : procedure(self: PCefTextfield; read_only: Integer); stdcall;
-    is_read_only                   : function(self: PCefTextfield): Integer; stdcall;
-    get_text                       : function(self: PCefTextfield): PCefStringUserFree; stdcall;
-    set_text                       : procedure(self: PCefTextfield; const text: PCefString); stdcall;
-    append_text                    : procedure(self: PCefTextfield; const text: PCefString); stdcall;
-    insert_or_replace_text         : procedure(self: PCefTextfield; const text: PCefString); stdcall;
-    has_selection                  : function(self: PCefTextfield): Integer; stdcall;
-    get_selected_text              : function(self: PCefTextfield): PCefStringUserFree; stdcall;
-    select_all                     : procedure(self: PCefTextfield; reversed: Integer); stdcall;
-    clear_selection                : procedure(self: PCefTextfield); stdcall;
-    get_selected_range             : function(self: PCefTextfield): TCefRange; stdcall;
-    select_range                   : procedure(self: PCefTextfield; const range: PCefRange); stdcall;
-    get_cursor_position            : function(self: PCefTextfield): NativeUInt; stdcall;
-    set_text_color                 : procedure(self: PCefTextfield; color: TCefColor); stdcall;
-    get_text_color                 : function(self: PCefTextfield): TCefColor; stdcall;
-    set_selection_text_color       : procedure(self: PCefTextfield; color: TCefColor); stdcall;
-    get_selection_text_color       : function(self: PCefTextfield): TCefColor; stdcall;
-    set_selection_background_color : procedure(self: PCefTextfield; color: TCefColor); stdcall;
-    get_selection_background_color : function(self: PCefTextfield): TCefColor; stdcall;
-    set_font_list                  : procedure(self: PCefTextfield; const font_list: PCefString); stdcall;
-    apply_text_color               : procedure(self: PCefTextfield; color: TCefColor; const range: PCefRange); stdcall;
-    apply_text_style               : procedure(self: PCefTextfield; style: TCefTextStyle; add: Integer; const range: PCefRange); stdcall;
-    is_command_enabled             : function(self: PCefTextfield; command_id: TCefTextFieldCommands): Integer; stdcall;
-    execute_command                : procedure(self: PCefTextfield; command_id: TCefTextFieldCommands); stdcall;
-    clear_edit_history             : procedure(self: PCefTextfield); stdcall;
-    set_placeholder_text           : procedure(self: PCefTextfield; const text: PCefString); stdcall;
-    get_placeholder_text           : function(self: PCefTextfield): PCefStringUserFree; stdcall;
-    set_placeholder_text_color     : procedure(self: PCefTextfield; color: TCefColor); stdcall;
-    set_accessible_name            : procedure(self: PCefTextfield; const name: PCefString); stdcall;
+    base                                   : TCefView;
+    set_password_input                     : procedure(self: PCefTextfield; password_input: Integer); stdcall;
+    is_password_input                      : function(self: PCefTextfield): Integer; stdcall;
+    set_read_only                          : procedure(self: PCefTextfield; read_only: Integer); stdcall;
+    is_read_only                           : function(self: PCefTextfield): Integer; stdcall;
+    get_text                               : function(self: PCefTextfield): PCefStringUserFree; stdcall;
+    set_text                               : procedure(self: PCefTextfield; const text: PCefString); stdcall;
+    append_text                            : procedure(self: PCefTextfield; const text: PCefString); stdcall;
+    insert_or_replace_text                 : procedure(self: PCefTextfield; const text: PCefString); stdcall;
+    has_selection                          : function(self: PCefTextfield): Integer; stdcall;
+    get_selected_text                      : function(self: PCefTextfield): PCefStringUserFree; stdcall;
+    select_all                             : procedure(self: PCefTextfield; reversed: Integer); stdcall;
+    clear_selection                        : procedure(self: PCefTextfield); stdcall;
+    get_selected_range                     : function(self: PCefTextfield): TCefRange; stdcall;
+    select_range                           : procedure(self: PCefTextfield; const range: PCefRange); stdcall;
+    get_cursor_position                    : function(self: PCefTextfield): NativeUInt; stdcall;
+    set_text_color_removed                 : NativeUInt;  {* CEF_API_REMOVED(15000) *}
+    get_text_color_removed                 : NativeUInt;  {* CEF_API_REMOVED(15000) *}
+    set_selection_text_color_removed       : NativeUInt;  {* CEF_API_REMOVED(15000) *}
+    get_selection_text_color_removed       : NativeUInt;  {* CEF_API_REMOVED(15000) *}
+    set_selection_background_color_removed : NativeUInt;  {* CEF_API_REMOVED(15000) *}
+    get_selection_background_color_removed : NativeUInt;  {* CEF_API_REMOVED(15000) *}
+    set_font_list                          : procedure(self: PCefTextfield; const font_list: PCefString); stdcall;
+    apply_text_color                       : procedure(self: PCefTextfield; color: TCefColor; const range: PCefRange); stdcall;
+    apply_text_style                       : procedure(self: PCefTextfield; style: TCefTextStyle; add: Integer; const range: PCefRange); stdcall;
+    is_command_enabled                     : function(self: PCefTextfield; command_id: TCefTextFieldCommands): Integer; stdcall;
+    execute_command                        : procedure(self: PCefTextfield; command_id: TCefTextFieldCommands); stdcall;
+    clear_edit_history                     : procedure(self: PCefTextfield); stdcall;
+    set_placeholder_text                   : procedure(self: PCefTextfield; const text: PCefString); stdcall;
+    get_placeholder_text                   : function(self: PCefTextfield): PCefStringUserFree; stdcall;
+    set_placeholder_text_color_removed     : NativeUInt;  {* CEF_API_REMOVED(15000) *}
+    set_accessible_name                    : procedure(self: PCefTextfield; const name: PCefString); stdcall;
   end;
 
   /// <summary>
