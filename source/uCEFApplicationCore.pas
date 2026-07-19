@@ -3034,7 +3034,12 @@ begin
     if not(FSingleProcess) and (length(FBrowserSubprocessPath) > 0) then
       Result := MultiExeProcessing
      else
-      Result := SingleExeProcessing;
+      begin
+        Result := SingleExeProcessing;
+    {$IFDEF SHOW_SUBPROCESS_ERRORS} //kjs add
+        ShowErrorMessageDlg('Fell back to SingleExe Processing');
+    {$ENDIF SHOW_SUBPROCESS_ERRORS}
+      end;
     {$ENDIF}
 end;
 
@@ -3050,9 +3055,7 @@ begin
 
   try
     try
-      if not(FSingleProcess) and
-         (ProcessType <> ptBrowser) and
-         LoadCEFlibrary then
+      if not(FSingleProcess) and (ProcessType <> ptBrowser) and LoadCEFlibrary then
         begin
           TempApp := TCustomCefApp.Create(self);
 
@@ -3060,7 +3063,11 @@ begin
             Result := True
            else
             TempApp.RemoveReferences;
-        end;
+        end
+    {$IFDEF SHOW_SUBPROCESS_ERRORS} //kjs add
+      else
+       ShowErrorMessageDlg('Failed to Launch Subprocess')
+    {$ENDIF SHOW_SUBPROCESS_ERRORS};
     except
       on e : exception do
         if CustomExceptionHandler('TCefApplicationCore.StartSubProcess', e) then raise;
@@ -4183,33 +4190,43 @@ var
 {$ENDIF}
 begin
   Result := 0;
+  try
+  //KJS added sanity check
+    if (FBrowserSubprocessPath='') or not FileExists(FBrowserSubprocessPath) then
+      exit;
 
-{$IFDEF MSWINDOWS}
-  TempHandle := CreateToolHelp32SnapShot(TH32CS_SNAPPROCESS, 0);
-  if (TempHandle = INVALID_HANDLE_VALUE) then exit;
+  {$IFDEF MSWINDOWS}
+    TempHandle := CreateToolHelp32SnapShot(TH32CS_SNAPPROCESS, 0);
+    if (TempHandle = INVALID_HANDLE_VALUE) then exit;
 
-  ZeroMemory(@TempProcess, SizeOf(TProcessEntry32));
-  TempProcess.dwSize := Sizeof(TProcessEntry32);
-  TempPID            := GetCurrentProcessID;
-  TempMain           := ExtractFileName(paramstr(0));
-  TempSubProc        := ExtractFileName({$IFDEF FPC}UTF8Encode({$ENDIF}FBrowserSubprocessPath{$IFDEF FPC}){$ENDIF});
+    ZeroMemory(@TempProcess, SizeOf(TProcessEntry32));
+    TempProcess.dwSize := Sizeof(TProcessEntry32);
+    TempPID            := GetCurrentProcessID;
+    TempMain           := ExtractFileName(paramstr(0));
+    TempSubProc        := ExtractFileName({$IFDEF FPC}UTF8Encode({$ENDIF}FBrowserSubprocessPath{$IFDEF FPC}){$ENDIF});
 
-  Process32First(TempHandle, TempProcess);
+    Process32First(TempHandle, TempProcess);
 
-  repeat
-    if (TempProcess.th32ProcessID       <> TempPID) and
-       (TempProcess.th32ParentProcessID =  TempPID) then
-      begin
-        TempName := TempProcess.szExeFile;
-        TempName := ExtractFileName(TempName);
+    repeat
+      if (TempProcess.th32ProcessID       <> TempPID) and
+         (TempProcess.th32ParentProcessID =  TempPID) then
+        begin
+          TempName := TempProcess.szExeFile;
+          TempName := ExtractFileName(TempName);
 
-        if (CompareText(TempName, TempMain) = 0) or
-           ((length(TempSubProc) > 0) and (CompareText(TempName, TempSubProc) = 0)) then
-          inc(Result);
-      end;
-  until not(Process32Next(TempHandle, TempProcess));
-
-  CloseHandle(TempHandle);
+          if (CompareText(TempName, TempMain) = 0) or
+             ((length(TempSubProc) > 0) and (CompareText(TempName, TempSubProc) = 0)) then
+            inc(Result);
+        end;
+    until not(Process32Next(TempHandle, TempProcess));
+    CloseHandle(TempHandle);
+//KJS ADDED
+  finally
+    {$IFDEF SHOW_SUBPROCESS_ERRORS}
+      if (Result=0) then
+        ShowErrorMessageDlg('Failed to Find Running '+ExtractFileName(FBrowserSubprocessPath));
+    {$ENDIF SHOW_SUBPROCESS_ERRORS}
+  end;
 {$ENDIF}
 end;
 

@@ -2400,7 +2400,7 @@ const
 {$ENDIF}
 begin
   {$IFDEF MSWINDOWS}
-  Result := IncludeTrailingPathDelimiter(ExtractFileDir(GetModuleName(HINSTANCE{$IFDEF FPC}(){$ENDIF})));
+  Result := IncludeTrailingPathDelimiter(IncludeTrailingPathDelimiter(ExtractFileDir(GetModuleName(HINSTANCE{$IFDEF FPC}(){$ENDIF})))+'res');
   {$ENDIF}
 
   {$IFDEF LINUX}
