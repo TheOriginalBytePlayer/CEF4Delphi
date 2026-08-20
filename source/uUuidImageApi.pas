@@ -12,7 +12,6 @@ function RegisterUuidImageFromFile(const AGuidText: string; const AFileName: str
 procedure UnregisterUuidImage(const AGuid: TGUID); overload;
 procedure UnregisterUuidImage(const AGuidText: string); overload;
 procedure ClearUuidImages;
-procedure RegisterUuidSchemeFactory;
 
 implementation
 
