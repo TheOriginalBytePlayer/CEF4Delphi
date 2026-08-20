@@ -7,22 +7,38 @@ uses
   uCEFInterfaces, uCEFTypes, uCEFResourceHandler, uCEFRequest, uCEFResponse;
 
 type
+  TUuidImageItem = record
+    Bytes: TBytes;
+    Extension: string; // normalized: '' or '.ext'
+  end;
+
+  TUuidImageStoreEnumProc = reference to procedure(const AGuidText: string; const AItem: TUuidImageItem);
+
   // Simple in-memory UUID -> image bytes store (thread-safe)
   TUuidImageStore = class
   private
-    class var FMap: TDictionary<string, TBytes>;
+    class var FMap: TDictionary<string, TUuidImageItem>;
     class var FLock: TObject;
     class constructor Create;
     class destructor Destroy;
     class function NormalizeGuid(const AGuid: TGUID): string; static;
+    class function NormalizeExt(const AExtension: string): string; static;
   public
-    class procedure Put(const AGuid: TGUID; const ABytes: TBytes); overload; static;
-    class procedure Put(const AGuidText: string; const ABytes: TBytes); overload; static;
+    class procedure Put(const AGuid: TGUID; const ABytes: TBytes; const AExtension: string = ''); overload; static;
+    class procedure Put(const AGuidText: string; const ABytes: TBytes; const AExtension: string = ''); overload; static;
+
     class function TryGet(const AGuid: TGUID; out ABytes: TBytes): Boolean; overload; static;
     class function TryGet(const AGuidText: string; out ABytes: TBytes): Boolean; overload; static;
+
+    class function TryGetItem(const AGuid: TGUID; out AItem: TUuidImageItem): Boolean; overload; static;
+    class function TryGetItem(const AGuidText: string; out AItem: TUuidImageItem): Boolean; overload; static;
+
     class procedure Remove(const AGuid: TGUID); overload; static;
     class procedure Remove(const AGuidText: string); overload; static;
     class procedure Clear; static;
+
+    // Enumerates a snapshot, so callback does not run under lock.
+    class procedure ForEach(const AProc: TUuidImageStoreEnumProc); static;
   end;
 
   TImgResourceHandler = class(TCefResourceHandlerOwn)
@@ -133,7 +149,7 @@ end;
 
 class constructor TUuidImageStore.Create;
 begin
-  FMap  := TDictionary<string, TBytes>.Create;
+  FMap  := TDictionary<string, TUuidImageItem>.Create;
   FLock := TObject.Create;
 end;
 
@@ -148,23 +164,34 @@ begin
   Result := LowerCase(GuidToString(AGuid)); // "{xxxxxxxx-...}"
 end;
 
-class procedure TUuidImageStore.Put(const AGuid: TGUID; const ABytes: TBytes);
+class function TUuidImageStore.NormalizeExt(const AExtension: string): string;
 begin
-  Put(NormalizeGuid(AGuid), ABytes);
+  Result := LowerCase(Trim(AExtension));
+  if (Result <> '') and (Result[1] <> '.') then
+    Result := '.' + Result;
 end;
 
-class procedure TUuidImageStore.Put(const AGuidText: string; const ABytes: TBytes);
+class procedure TUuidImageStore.Put(const AGuid: TGUID; const ABytes: TBytes; const AExtension: string = '');
+begin
+  Put(NormalizeGuid(AGuid), ABytes, AExtension);
+end;
+
+class procedure TUuidImageStore.Put(const AGuidText: string; const ABytes: TBytes; const AExtension: string = '');
 var
   G: TGUID;
   K: string;
+  Item: TUuidImageItem;
 begin
   if not TryStrToGUID(Trim(AGuidText), G) then
     Exit;
   K := NormalizeGuid(G);
 
+  Item.Bytes := Copy(ABytes);
+  Item.Extension := NormalizeExt(AExtension);
+
   TMonitor.Enter(FLock);
   try
-    FMap.AddOrSetValue(K, Copy(ABytes));
+    FMap.AddOrSetValue(K, Item);
   finally
     TMonitor.Exit(FLock);
   end;
@@ -177,12 +204,29 @@ end;
 
 class function TUuidImageStore.TryGet(const AGuidText: string; out ABytes: TBytes): Boolean;
 var
+  Item: TUuidImageItem;
+begin
+  Result := TryGetItem(AGuidText, Item);
+  if Result then
+    ABytes := Copy(Item.Bytes)
+  else
+    SetLength(ABytes, 0);
+end;
+
+class function TUuidImageStore.TryGetItem(const AGuid: TGUID; out AItem: TUuidImageItem): Boolean;
+begin
+  Result := TryGetItem(NormalizeGuid(AGuid), AItem);
+end;
+
+class function TUuidImageStore.TryGetItem(const AGuidText: string; out AItem: TUuidImageItem): Boolean;
+var
   G: TGUID;
   K: string;
-  Temp: TBytes;
+  Temp: TUuidImageItem;
 begin
   Result := False;
-  SetLength(ABytes, 0);
+  SetLength(AItem.Bytes, 0);
+  AItem.Extension := '';
 
   if not TryStrToGUID(Trim(AGuidText), G) then
     Exit;
@@ -193,7 +237,8 @@ begin
   try
     if FMap.TryGetValue(K, Temp) then
     begin
-      ABytes := Copy(Temp);
+      AItem.Bytes := Copy(Temp.Bytes);
+      AItem.Extension := Temp.Extension;
       Result := True;
     end;
   finally
@@ -231,6 +276,25 @@ begin
   finally
     TMonitor.Exit(FLock);
   end;
+end;
+
+class procedure TUuidImageStore.ForEach(const AProc: TUuidImageStoreEnumProc);
+var
+  Snapshot: TArray<TPair<string, TUuidImageItem>>;
+  Pair: TPair<string, TUuidImageItem>;
+begin
+  if not Assigned(AProc) then
+    Exit;
+
+  TMonitor.Enter(FLock);
+  try
+    Snapshot := FMap.ToArray;
+  finally
+    TMonitor.Exit(FLock);
+  end;
+
+  for Pair in Snapshot do
+    AProc(Pair.Key, Pair.Value);
 end;
 
 { TImgResourceHandler }
