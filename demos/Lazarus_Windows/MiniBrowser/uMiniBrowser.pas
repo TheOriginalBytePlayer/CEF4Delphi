@@ -343,7 +343,8 @@ begin
   TempInfo := 'libcef.dll : '         + CRLF + GlobalCEFApp.LibCefVersion    + CRLF + CRLF +
               'chrome_elf.dll : '     + CRLF + GlobalCEFApp.ChromeVersion    + CRLF + CRLF +
               'Platform API hash : '  + CRLF + GlobalCEFApp.ApiHashPlatform  + CRLF + CRLF +
-              'Commit API hash : '    + CRLF + GlobalCEFApp.ApiHashCommit;
+              'Commit API hash : '    + CRLF + GlobalCEFApp.ApiHashCommit    + CRLF + CRLF +
+              'Full CEF version : '   + CRLF + GlobalCEFApp.VersionFull;
 
   showmessage(TempInfo);
 end;

@@ -73,6 +73,26 @@ body { margin: 0.5em; }
 <td class="visibility"><span class="badge vis-public">Public</span></td>
 <td class="itemcode"><code><strong><a href="uCEFTypes.TCefVersionInfoEx.html#sandbox_compat_hash">sandbox_compat_hash</a></strong>: AnsiString;</code></td>
 </tr>
+<tr class="list visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><code><strong><a href="uCEFTypes.TCefVersionInfoEx.html#libcef_path">libcef_path</a></strong>: PWideChar;</code></td>
+</tr>
+<tr class="list2 visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><code><strong><a href="uCEFTypes.TCefVersionInfoEx.html#libcef_is_bundled">libcef_is_bundled</a></strong>: integer;</code></td>
+</tr>
+<tr class="list visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><code><strong><a href="uCEFTypes.TCefVersionInfoEx.html#libcef_version_full">libcef_version_full</a></strong>: PAnsiChar;</code></td>
+</tr>
+<tr class="list2 visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><code><strong><a href="uCEFTypes.TCefVersionInfoEx.html#installer_error_code">installer_error_code</a></strong>: integer;</code></td>
+</tr>
+<tr class="list visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><code><strong><a href="uCEFTypes.TCefVersionInfoEx.html#installer_error_message">installer_error_message</a></strong>: PAnsiChar;</code></td>
+</tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Fields</h3>
@@ -158,6 +178,56 @@ body { margin: 0.5em; }
 <tr><td colspan="2">
 <p>
  Sandbox compatibility hash (Windows only, empty on other platforms). </p>
+</td></tr>
+</table>
+<table class="detail visibility-public wide_list">
+<tr class="list visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><span id="libcef_path"></span><code><strong>libcef_path</strong>: PWideChar;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Path to libcef.dll provided by the bootstrap installer (Windows only). Null if not using the installer or on other platforms. Owned by the bootstrap executable, valid for the lifetime of the process. Always nullptr when populated via cef_version_info_all(). </p>
+</td></tr>
+</table>
+<table class="detail visibility-public wide_list">
+<tr class="list visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><span id="libcef_is_bundled"></span><code><strong>libcef_is_bundled</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Non-zero if libcef_path points to a bundled CEF directory (shipped with the application) rather than a CDN-installed version. When non-zero, libcef.dll may be signed with the client application's certificate rather than the CEF distribution certificate. Always zero when populated via cef_version_info_all(). </p>
+</td></tr>
+</table>
+<table class="detail visibility-public wide_list">
+<tr class="list visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><span id="libcef_version_full"></span><code><strong>libcef_version_full</strong>: PAnsiChar;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Full version string from installer metadata (e.g., &quot;150.0.1+gabc1234+chromium-150.0.7871.4&quot;). Used to verify that the loaded libcef.dll matches the version the installer resolved. Null if not using the installer or on other platforms. Owned by the bootstrap executable, valid for the lifetime of the process. Always nullptr when populated via cef_version_info_all(). </p>
+</td></tr>
+</table>
+<table class="detail visibility-public wide_list">
+<tr class="list visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><span id="installer_error_code"></span><code><strong>installer_error_code</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ Structured installer startup error code. A resolved startup has a non-null libcef_path and value zero. Installer-not-configured has a null libcef_path and value zero. A recoverable resolution failure has a null libcef_path and a non-zero value with installer_error_message populated. Always zero when populated via cef_version_info_all(). </p>
+</td></tr>
+</table>
+<table class="detail visibility-public wide_list">
+<tr class="list visibility-public">
+<td class="visibility"><span class="badge vis-public">Public</span></td>
+<td class="itemcode"><span id="installer_error_message"></span><code><strong>installer_error_message</strong>: PAnsiChar;</code></td>
+</tr>
+<tr><td colspan="2">
+<p>
+ UTF-8 diagnostic for a recoverable installer resolution failure, or null otherwise. Owned by bootstrap process-lifetime storage and must not be freed or retained beyond that lifetime. Always nullptr when populated via cef_version_info_all(). </p>
 </td></tr>
 </table>
 <hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 1.0.4</a>. </em>

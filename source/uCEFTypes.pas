@@ -1110,19 +1110,58 @@ type
     /// <summary>
     /// Size of this structure.
     /// </summary>
-    size                 : NativeUInt;
-    cef_version_major    : integer;
-    cef_version_minor    : integer;
-    cef_version_patch    : integer;
-    cef_commit_number    : integer;
-    chrome_version_major : integer;
-    chrome_version_minor : integer;
-    chrome_version_build : integer;
-    chrome_version_patch : integer;
+    size                       : NativeUInt;
+    cef_version_major          : integer;
+    cef_version_minor          : integer;
+    cef_version_patch          : integer;
+    cef_commit_number          : integer;
+    chrome_version_major       : integer;
+    chrome_version_minor       : integer;
+    chrome_version_build       : integer;
+    chrome_version_patch       : integer;
     /// <summary>
     /// Sandbox compatibility hash (Windows only, empty on other platforms).
     /// </summary>
-    sandbox_compat_hash  : AnsiString;  {* CEF_API_ADDED(14600) *}
+    sandbox_compat_hash        : AnsiString;  {* CEF_API_ADDED(14600) *}
+    /// <summary>
+    /// Path to libcef.dll provided by the bootstrap installer (Windows only).
+    /// Null if not using the installer or on other platforms.
+    /// Owned by the bootstrap executable, valid for the lifetime of the process.
+    /// Always nullptr when populated via cef_version_info_all().
+    /// </summary>
+    libcef_path                : PWideChar;   {* CEF_API_ADDED(15101) *}
+    /// <summary>
+    /// Non-zero if libcef_path points to a bundled CEF directory (shipped with
+    /// the application) rather than a CDN-installed version. When non-zero,
+    /// libcef.dll may be signed with the client application's certificate rather
+    /// than the CEF distribution certificate.
+    /// Always zero when populated via cef_version_info_all().
+    /// </summary>
+    libcef_is_bundled          : integer;     {* CEF_API_ADDED(15101) *}
+    /// <summary>
+    /// Full version string from installer metadata (e.g.,
+    /// "150.0.1+gabc1234+chromium-150.0.7871.4"). Used to verify that the
+    /// loaded libcef.dll matches the version the installer resolved.
+    /// Null if not using the installer or on other platforms.
+    /// Owned by the bootstrap executable, valid for the lifetime of the process.
+    /// Always nullptr when populated via cef_version_info_all().
+    /// </summary>
+    libcef_version_full        : PAnsiChar;   {* CEF_API_ADDED(15101) *}
+    /// <summary>
+    /// Structured installer startup error code. A resolved startup has a
+    /// non-null libcef_path and value zero. Installer-not-configured has a null
+    /// libcef_path and value zero. A recoverable resolution failure has a null
+    /// libcef_path and a non-zero value with installer_error_message populated.
+    /// Always zero when populated via cef_version_info_all().
+    /// </summary>
+    installer_error_code       : integer;     {* CEF_API_ADDED(15101) *}
+    /// <summary>
+    /// UTF-8 diagnostic for a recoverable installer resolution failure, or null
+    /// otherwise. Owned by bootstrap process-lifetime storage and must not be
+    /// freed or retained beyond that lifetime. Always nullptr when populated via
+    /// cef_version_info_all().
+    /// </summary>
+    installer_error_message    : PAnsiChar;   {* CEF_API_ADDED(15101) *}
   end;
 
   {$IFDEF MSWINDOWS}
@@ -3802,7 +3841,7 @@ type
     CEF_CTBT_SEND_TAB_TO_SELF_DEPRECATED,   {* CEF_API_ADDED(13600) *}
     CEF_CTBT_SIDE_PANEL_DEPRECATED,         {* CEF_API_ADDED(14000) *}
     CEF_CTBT_MEDIA,                         {* CEF_API_ADDED(14000) *}
-    CEF_CTBT_TAB_SEARCH,                    {* CEF_API_ADDED(14000) *}
+    CEF_CTBT_TAB_SEARCH_DEPRECATED,         {* CEF_API_ADDED(15100) *}
     CEF_CTBT_BATTERY_SAVER,                 {* CEF_API_ADDED(14000) *}
     CEF_CTBT_AVATAR,                        {* CEF_API_ADDED(14000) *}
     CEF_CTBT_NUM_VALUES
@@ -5809,6 +5848,7 @@ type
     /// users.
     /// </summary>
     CEF_CONTENT_SETTING_TYPE_SUB_APPS_WITHOUT_PROMPTS,                           {* CEF_API_ADDED(15000) *}
+    CEF_CONTENT_SETTING_TYPE_INLINE_CUE_MENU,                                    {* CEF_API_ADDED(15100) *}
     CEF_CONTENT_SETTING_TYPE_NUM_VALUES
   );
 

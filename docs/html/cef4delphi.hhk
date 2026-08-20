@@ -2325,6 +2325,10 @@
 <param name="Local" value="uCEFLibFunctions.html#cef_value_create">
 </object>
 <li><object type="text/sitemap">
+<param name="Name" value="cef_version_full">
+<param name="Local" value="uCEFLibFunctions.html#cef_version_full">
+</object>
+<li><object type="text/sitemap">
 <param name="Name" value="cef_version_info">
 <param name="Local" value="uCEFLibFunctions.html#cef_version_info">
 </object>
@@ -3187,6 +3191,10 @@
 <param name="Local" value="uCEFConstants.html#ERR_CONTEXT_SHUT_DOWN">
 </object>
 <li><object type="text/sitemap">
+<param name="Name" value="ERR_CONTROL_MSG_TOO_BIG">
+<param name="Local" value="uCEFConstants.html#ERR_CONTROL_MSG_TOO_BIG">
+</object>
+<li><object type="text/sitemap">
 <param name="Name" value="ERR_CT_CONSISTENCY_PROOF_PARSING_FAILED">
 <param name="Local" value="uCEFConstants.html#ERR_CT_CONSISTENCY_PROOF_PARSING_FAILED">
 </object>
@@ -3209,6 +3217,10 @@
 <li><object type="text/sitemap">
 <param name="Name" value="ERR_DNS_CACHE_INVALIDATION_IN_PROGRESS">
 <param name="Local" value="uCEFConstants.html#ERR_DNS_CACHE_INVALIDATION_IN_PROGRESS">
+</object>
+<li><object type="text/sitemap">
+<param name="Name" value="ERR_DNS_DIRECT_ONLY">
+<param name="Local" value="uCEFConstants.html#ERR_DNS_DIRECT_ONLY">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="ERR_DNS_FORMAT_ERROR">
@@ -12189,10 +12201,6 @@
 <param name="Local" value="uCEFConstants.html#IDC_BOOKMARK_BAR_SHOW_MANAGED_BOOKMARKS">
 </object>
 <li><object type="text/sitemap">
-<param name="Name" value="IDC_BOOKMARK_BAR_SHOW_READING_LIST">
-<param name="Local" value="uCEFConstants.html#IDC_BOOKMARK_BAR_SHOW_READING_LIST">
-</object>
-<li><object type="text/sitemap">
 <param name="Name" value="IDC_BOOKMARK_BAR_SUBMENU">
 <param name="Local" value="uCEFConstants.html#IDC_BOOKMARK_BAR_SUBMENU">
 </object>
@@ -12241,6 +12249,10 @@
 <param name="Local" value="uCEFConstants.html#IDC_CHECK_SPELLING_WHILE_TYPING">
 </object>
 <li><object type="text/sitemap">
+<param name="Name" value="IDC_CHROME_ENTERPRISE_RELEASE_NOTES">
+<param name="Local" value="uCEFConstants.html#IDC_CHROME_ENTERPRISE_RELEASE_NOTES">
+</object>
+<li><object type="text/sitemap">
 <param name="Name" value="IDC_CHROME_MENU">
 <param name="Local" value="uCEFConstants.html#IDC_CHROME_MENU">
 </object>
@@ -12263,10 +12275,6 @@
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_CLOSE_PROFILE">
 <param name="Local" value="uCEFConstants.html#IDC_CLOSE_PROFILE">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_CLOSE_SIGN_IN_PROMO">
-<param name="Local" value="uCEFConstants.html#IDC_CLOSE_SIGN_IN_PROMO">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_CLOSE_TAB">
@@ -12343,10 +12351,6 @@
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_CONTENT_CONTEXT_COPYAVLOCATION">
 <param name="Local" value="uCEFConstants.html#IDC_CONTENT_CONTEXT_COPYAVLOCATION">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_CONTENT_CONTEXT_COPYEMAILADDRESS">
-<param name="Local" value="uCEFConstants.html#IDC_CONTENT_CONTEXT_COPYEMAILADDRESS">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_CONTENT_CONTEXT_COPYIMAGE">
@@ -12661,6 +12665,10 @@
 <param name="Local" value="uCEFConstants.html#IDC_CONTENT_CONTEXT_SAVEVIDEOFRAMEAS">
 </object>
 <li><object type="text/sitemap">
+<param name="Name" value="IDC_CONTENT_CONTEXT_SAVE_TO_MEMORY_BANKS">
+<param name="Local" value="uCEFConstants.html#IDC_CONTENT_CONTEXT_SAVE_TO_MEMORY_BANKS">
+</object>
+<li><object type="text/sitemap">
 <param name="Name" value="IDC_CONTENT_CONTEXT_SEARCHLENSFORIMAGE">
 <param name="Local" value="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEARCHLENSFORIMAGE">
 </object>
@@ -12899,10 +12907,6 @@
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_EDIT_SEARCH_ENGINES">
 <param name="Local" value="uCEFConstants.html#IDC_EDIT_SEARCH_ENGINES">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_ELEVATED_RECOVERY_DIALOG">
-<param name="Local" value="uCEFConstants.html#IDC_ELEVATED_RECOVERY_DIALOG">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_EMAIL_PAGE_LOCATION">
@@ -13145,10 +13149,6 @@
 <param name="Local" value="uCEFConstants.html#IDC_MEDIA_ROUTER_ABOUT">
 </object>
 <li><object type="text/sitemap">
-<param name="Name" value="IDC_MEDIA_ROUTER_ALWAYS_SHOW_TOOLBAR_ACTION">
-<param name="Local" value="uCEFConstants.html#IDC_MEDIA_ROUTER_ALWAYS_SHOW_TOOLBAR_ACTION">
-</object>
-<li><object type="text/sitemap">
 <param name="Name" value="IDC_MEDIA_ROUTER_HELP">
 <param name="Local" value="uCEFConstants.html#IDC_MEDIA_ROUTER_HELP">
 </object>
@@ -13157,24 +13157,8 @@
 <param name="Local" value="uCEFConstants.html#IDC_MEDIA_ROUTER_LEARN_MORE">
 </object>
 <li><object type="text/sitemap">
-<param name="Name" value="IDC_MEDIA_ROUTER_SHOWN_BY_POLICY">
-<param name="Local" value="uCEFConstants.html#IDC_MEDIA_ROUTER_SHOWN_BY_POLICY">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_MEDIA_ROUTER_SHOW_IN_TOOLBAR">
-<param name="Local" value="uCEFConstants.html#IDC_MEDIA_ROUTER_SHOW_IN_TOOLBAR">
-</object>
-<li><object type="text/sitemap">
 <param name="Name" value="IDC_MEDIA_ROUTER_TOGGLE_MEDIA_REMOTING">
 <param name="Local" value="uCEFConstants.html#IDC_MEDIA_ROUTER_TOGGLE_MEDIA_REMOTING">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_MEDIA_STREAM_DEVICE_ALWAYS_ALLOW">
-<param name="Local" value="uCEFConstants.html#IDC_MEDIA_STREAM_DEVICE_ALWAYS_ALLOW">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_MEDIA_STREAM_DEVICE_STATUS_TRAY">
-<param name="Local" value="uCEFConstants.html#IDC_MEDIA_STREAM_DEVICE_STATUS_TRAY">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_MEDIA_TOOLBAR_CONTEXT_REPORT_CAST_ISSUE">
@@ -13287,6 +13271,10 @@
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_OMNIBOX_CONTEXT_SHARED_TABS_SUBMENU">
 <param name="Local" value="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_SHARED_TABS_SUBMENU">
+</object>
+<li><object type="text/sitemap">
+<param name="Name" value="IDC_OMNIBOX_CONTEXT_SMART_TAB_SHARING">
+<param name="Local" value="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_SMART_TAB_SHARING">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_OPEN_CURRENT_URL">
@@ -13649,24 +13637,8 @@
 <param name="Local" value="uCEFConstants.html#IDC_SHOW_READING_MODE_SIDE_PANEL">
 </object>
 <li><object type="text/sitemap">
-<param name="Name" value="IDC_SHOW_SAVE_LOCAL_CARD_SIGN_IN_PROMO_IF_APPLICABLE">
-<param name="Local" value="uCEFConstants.html#IDC_SHOW_SAVE_LOCAL_CARD_SIGN_IN_PROMO_IF_APPLICABLE">
-</object>
-<li><object type="text/sitemap">
 <param name="Name" value="IDC_SHOW_SEARCH_TOOLS">
 <param name="Local" value="uCEFConstants.html#IDC_SHOW_SEARCH_TOOLS">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_SHOW_SETTINGS_CHANGE_FIRST">
-<param name="Local" value="uCEFConstants.html#IDC_SHOW_SETTINGS_CHANGE_FIRST">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_SHOW_SETTINGS_CHANGE_LAST">
-<param name="Local" value="uCEFConstants.html#IDC_SHOW_SETTINGS_CHANGE_LAST">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_SHOW_SETTINGS_RESET_BUBBLE">
-<param name="Local" value="uCEFConstants.html#IDC_SHOW_SETTINGS_RESET_BUBBLE">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_SHOW_SIGNIN">
@@ -13675,10 +13647,6 @@
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_SHOW_SIGNIN_WHEN_PAUSED">
 <param name="Local" value="uCEFConstants.html#IDC_SHOW_SIGNIN_WHEN_PAUSED">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_SHOW_SRT_BUBBLE">
-<param name="Local" value="uCEFConstants.html#IDC_SHOW_SRT_BUBBLE">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_SHOW_SYNC_PASSPHRASE_DIALOG">
@@ -13725,6 +13693,10 @@
 <param name="Local" value="uCEFConstants.html#IDC_SPELLCHECK_MULTI_LINGUAL">
 </object>
 <li><object type="text/sitemap">
+<param name="Name" value="IDC_SPELLCHECK_REMOVE_FROM_DICTIONARY">
+<param name="Local" value="uCEFConstants.html#IDC_SPELLCHECK_REMOVE_FROM_DICTIONARY">
+</object>
+<li><object type="text/sitemap">
 <param name="Name" value="IDC_SPELLCHECK_SUGGESTION_0">
 <param name="Local" value="uCEFConstants.html#IDC_SPELLCHECK_SUGGESTION_0">
 </object>
@@ -13743,10 +13715,6 @@
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_SPELLCHECK_SUGGESTION_4">
 <param name="Local" value="uCEFConstants.html#IDC_SPELLCHECK_SUGGESTION_4">
-</object>
-<li><object type="text/sitemap">
-<param name="Name" value="IDC_SPELLPANEL_TOGGLE">
-<param name="Local" value="uCEFConstants.html#IDC_SPELLPANEL_TOGGLE">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_STATUS_TRAY_KEEP_CHROME_RUNNING_IN_BACKGROUND">
@@ -13819,6 +13787,10 @@
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_TOGGLE_VERTICAL_TABS">
 <param name="Local" value="uCEFConstants.html#IDC_TOGGLE_VERTICAL_TABS">
+</object>
+<li><object type="text/sitemap">
+<param name="Name" value="IDC_TOGGLE_VERTICAL_TABS_COLLAPSE">
+<param name="Local" value="uCEFConstants.html#IDC_TOGGLE_VERTICAL_TABS_COLLAPSE">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="IDC_TOGGLE_VERTICAL_TABS_EXPAND_ON_HOVER">
@@ -17703,6 +17675,10 @@
 <param name="Local" value="uCEFApplicationCore.TCefApplicationCore.html#GetUsedMemory">
 </object>
 <li><object type="text/sitemap">
+<param name="Name" value="GetVersionFull">
+<param name="Local" value="uCEFApplicationCore.TCefApplicationCore.html#GetVersionFull">
+</object>
+<li><object type="text/sitemap">
 <param name="Name" value="GlobalContextInitialized">
 <param name="Local" value="uCEFApplicationCore.TCefApplicationCore.html#GlobalContextInitialized">
 </object>
@@ -18421,6 +18397,10 @@
 <li><object type="text/sitemap">
 <param name="Name" value="ValidComponentID">
 <param name="Local" value="uCEFApplicationCore.TCefApplicationCore.html#ValidComponentID-integer-">
+</object>
+<li><object type="text/sitemap">
+<param name="Name" value="VersionFull">
+<param name="Local" value="uCEFApplicationCore.TCefApplicationCore.html#VersionFull">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="WindowlessRenderingEnabled">
@@ -36277,6 +36257,26 @@
 <li><object type="text/sitemap">
 <param name="Name" value="chrome_version_patch">
 <param name="Local" value="uCEFTypes.TCefVersionInfoEx.html#chrome_version_patch">
+</object>
+<li><object type="text/sitemap">
+<param name="Name" value="installer_error_code">
+<param name="Local" value="uCEFTypes.TCefVersionInfoEx.html#installer_error_code">
+</object>
+<li><object type="text/sitemap">
+<param name="Name" value="installer_error_message">
+<param name="Local" value="uCEFTypes.TCefVersionInfoEx.html#installer_error_message">
+</object>
+<li><object type="text/sitemap">
+<param name="Name" value="libcef_is_bundled">
+<param name="Local" value="uCEFTypes.TCefVersionInfoEx.html#libcef_is_bundled">
+</object>
+<li><object type="text/sitemap">
+<param name="Name" value="libcef_path">
+<param name="Local" value="uCEFTypes.TCefVersionInfoEx.html#libcef_path">
+</object>
+<li><object type="text/sitemap">
+<param name="Name" value="libcef_version_full">
+<param name="Local" value="uCEFTypes.TCefVersionInfoEx.html#libcef_version_full">
 </object>
 <li><object type="text/sitemap">
 <param name="Name" value="sandbox_compat_hash">

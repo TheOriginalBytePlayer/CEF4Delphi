@@ -2307,34 +2307,44 @@ body { margin: 0.5em; }
 <td class="itemdesc"><p> The request failed because the URLRequestContext is shutting down, or has been shut down. </p></td>
 </tr>
 <tr class="list2">
+<td class="itemname"><a class="bold" href="uCEFConstants.html#ERR_CONTROL_MSG_TOO_BIG">ERR_CONTROL_MSG_TOO_BIG</a></td>
+<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
+<td class="itemdesc"><p> The control message was too large for the transport. (for example a UDP message control data exceeds size threshold). </p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#ERR_CT_CONSISTENCY_PROOF_PARSING_FAILED">ERR_CT_CONSISTENCY_PROOF_PARSING_FAILED</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p> Certificate Transparency: Failed to parse the received consistency proof. </p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#ERR_CT_STH_INCOMPLETE">ERR_CT_STH_INCOMPLETE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p> Certificate Transparency: Received a signed tree head whose JSON parsing was OK but was missing some of the fields. </p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#ERR_CT_STH_PARSING_FAILED">ERR_CT_STH_PARSING_FAILED</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p> Certificate Transparency: Received a signed tree head that failed to parse. </p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#ERR_DICTIONARY_LOAD_FAILED">ERR_DICTIONARY_LOAD_FAILED</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p> The compression dictionary cannot be loaded. </p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#ERR_DISALLOWED_URL_SCHEME">ERR_DISALLOWED_URL_SCHEME</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p> The scheme of the URL is disallowed. </p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#ERR_DNS_CACHE_INVALIDATION_IN_PROGRESS">ERR_DNS_CACHE_INVALIDATION_IN_PROGRESS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p> Returned when DNS cache invalidation is in progress. This is a transient error. Callers may want to retry later. </p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="uCEFConstants.html#ERR_DNS_DIRECT_ONLY">ERR_DNS_DIRECT_ONLY</a></td>
+<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
+<td class="itemdesc"><p> Declined to call DNS for a direct_only request of a hostname whose traffic would be routed through a proxy. </p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#ERR_DNS_FORMAT_ERROR">ERR_DNS_FORMAT_ERROR</a></td>
@@ -3489,67 +3499,67 @@ body { margin: 0.5em; }
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
 <tr class="list">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_BAR_SHOW_READING_LIST">IDC_BOOKMARK_BAR_SHOW_READING_LIST</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_BAR_SUBMENU">IDC_BOOKMARK_BAR_SUBMENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_BAR_SUBMENU_ALWAYS_HIDE">IDC_BOOKMARK_BAR_SUBMENU_ALWAYS_HIDE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_BAR_SUBMENU_ALWAYS_SHOW">IDC_BOOKMARK_BAR_SUBMENU_ALWAYS_SHOW</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_BAR_SUBMENU_ONLY_ON_NTP">IDC_BOOKMARK_BAR_SUBMENU_ONLY_ON_NTP</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_BAR_TOGGLE_SHOW_TAB_GROUPS">IDC_BOOKMARK_BAR_TOGGLE_SHOW_TAB_GROUPS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_BAR_TRACK_PRICE_FOR_SHOPPING_BOOKMARK">IDC_BOOKMARK_BAR_TRACK_PRICE_FOR_SHOPPING_BOOKMARK</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_BAR_UNDO">IDC_BOOKMARK_BAR_UNDO</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_BAR_UNTRACK_PRICE_FOR_SHOPPING_BOOKMARK">IDC_BOOKMARK_BAR_UNTRACK_PRICE_FOR_SHOPPING_BOOKMARK</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_MANAGER">IDC_BOOKMARK_MANAGER</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_BOOKMARK_THIS_TAB">IDC_BOOKMARK_THIS_TAB</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CARET_BROWSING_TOGGLE">IDC_CARET_BROWSING_TOGGLE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CHECK_SPELLING_WHILE_TYPING">IDC_CHECK_SPELLING_WHILE_TYPING</a></td>
+<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
+<td class="itemdesc"><p>&nbsp;</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CHROME_ENTERPRISE_RELEASE_NOTES">IDC_CHROME_ENTERPRISE_RELEASE_NOTES</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
@@ -3584,107 +3594,97 @@ body { margin: 0.5em; }
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CLOSE_SIGN_IN_PROMO">IDC_CLOSE_SIGN_IN_PROMO</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CLOSE_TAB">IDC_CLOSE_TAB</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CLOSE_TAB_GROUP">IDC_CLOSE_TAB_GROUP</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CLOSE_WINDOW">IDC_CLOSE_WINDOW</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_ACCESSIBILITY_LABELS">IDC_CONTENT_CONTEXT_ACCESSIBILITY_LABELS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_ACCESSIBILITY_LABELS_TOGGLE">IDC_CONTENT_CONTEXT_ACCESSIBILITY_LABELS_TOGGLE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_ACCESSIBILITY_LABELS_TOGGLE_ONCE">IDC_CONTENT_CONTEXT_ACCESSIBILITY_LABELS_TOGGLE_ONCE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_ADD_A_NOTE">IDC_CONTENT_CONTEXT_ADD_A_NOTE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_ADD_LINK_TO_READING_LIST">IDC_CONTENT_CONTEXT_ADD_LINK_TO_READING_LIST</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_ARCHIVE_GLIC">IDC_CONTENT_CONTEXT_ARCHIVE_GLIC</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_AT_MEMORY">IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_AT_MEMORY</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PASSWORDS_IMPORT_PASSWORDS">IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PASSWORDS_IMPORT_PASSWORDS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PASSWORDS_SELECT_PASSWORD">IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PASSWORDS_SELECT_PASSWORD</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PASSWORDS_SUGGEST_PASSWORD">IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PASSWORDS_SUGGEST_PASSWORD</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PASSWORDS_USE_PASSKEY_FROM_ANOTHER_DEVICE">IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PASSWORDS_USE_PASSKEY_FROM_ANOTHER_DEVICE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PLUS_ADDRESS">IDC_CONTENT_CONTEXT_AUTOFILL_FALLBACK_PLUS_ADDRESS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_AUTOFILL_FEEDBACK">IDC_CONTENT_CONTEXT_AUTOFILL_FEEDBACK</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_CONTROLS">IDC_CONTENT_CONTEXT_CONTROLS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_COPY">IDC_CONTENT_CONTEXT_COPY</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_COPYAVLOCATION">IDC_CONTENT_CONTEXT_COPYAVLOCATION</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_COPYEMAILADDRESS">IDC_CONTENT_CONTEXT_COPYEMAILADDRESS</a></td>
+<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_COPYAVLOCATION">IDC_CONTENT_CONTEXT_COPYAVLOCATION</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
@@ -4079,307 +4079,307 @@ body { margin: 0.5em; }
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
 <tr class="list">
+<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SAVE_TO_MEMORY_BANKS">IDC_CONTENT_CONTEXT_SAVE_TO_MEMORY_BANKS</a></td>
+<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
+<td class="itemdesc"><p>&nbsp;</p></td>
+</tr>
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEARCHLENSFORIMAGE">IDC_CONTENT_CONTEXT_SEARCHLENSFORIMAGE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEARCHLENSFORVIDEOFRAME">IDC_CONTENT_CONTEXT_SEARCHLENSFORVIDEOFRAME</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEARCHWEBFOR">IDC_CONTENT_CONTEXT_SEARCHWEBFOR</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEARCHWEBFORIMAGE">IDC_CONTENT_CONTEXT_SEARCHWEBFORIMAGE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEARCHWEBFORNEWTAB">IDC_CONTENT_CONTEXT_SEARCHWEBFORNEWTAB</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEARCHWEBFORVIDEOFRAME">IDC_CONTENT_CONTEXT_SEARCHWEBFORVIDEOFRAME</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SELECTALL">IDC_CONTENT_CONTEXT_SELECTALL</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE1">IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE1</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE2">IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE2</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE3">IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE3</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE4">IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE4</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE5">IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_DEVICE5</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_MANAGE_DEVICES">IDC_CONTENT_CONTEXT_SEND_TAB_TO_SELF_MANAGE_DEVICES</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SHARING_CLICK_TO_CALL_MULTIPLE_DEVICES">IDC_CONTENT_CONTEXT_SHARING_CLICK_TO_CALL_MULTIPLE_DEVICES</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SHARING_CLICK_TO_CALL_SINGLE_DEVICE">IDC_CONTENT_CONTEXT_SHARING_CLICK_TO_CALL_SINGLE_DEVICE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SHARING_SHARED_CLIPBOARD_MULTIPLE_DEVICES">IDC_CONTENT_CONTEXT_SHARING_SHARED_CLIPBOARD_MULTIPLE_DEVICES</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SHARING_SHARED_CLIPBOARD_SINGLE_DEVICE">IDC_CONTENT_CONTEXT_SHARING_SHARED_CLIPBOARD_SINGLE_DEVICE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SHARING_SUBMENU">IDC_CONTENT_CONTEXT_SHARING_SUBMENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SHOWALLSAVEDPASSWORDS">IDC_CONTENT_CONTEXT_SHOWALLSAVEDPASSWORDS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SPELLING_SUGGESTION">IDC_CONTENT_CONTEXT_SPELLING_SUGGESTION</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_SPELLING_TOGGLE">IDC_CONTENT_CONTEXT_SPELLING_TOGGLE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION1">IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION1</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION2">IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION2</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION3">IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION3</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION4">IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION4</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION5">IDC_CONTENT_CONTEXT_START_SMART_SELECTION_ACTION5</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_TRANSLATE">IDC_CONTENT_CONTEXT_TRANSLATE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_UNDO">IDC_CONTENT_CONTEXT_UNDO</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_USE_PASSKEY_FROM_ANOTHER_DEVICE">IDC_CONTENT_CONTEXT_USE_PASSKEY_FROM_ANOTHER_DEVICE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_VIDEO_FRAME">IDC_CONTENT_CONTEXT_VIDEO_FRAME</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_VIEWFRAMEINFO">IDC_CONTENT_CONTEXT_VIEWFRAMEINFO</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_VIEWFRAMESOURCE">IDC_CONTENT_CONTEXT_VIEWFRAMESOURCE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_VIEWPAGEINFO">IDC_CONTENT_CONTEXT_VIEWPAGEINFO</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_CONTEXT_WEB_REGION_SEARCH">IDC_CONTENT_CONTEXT_WEB_REGION_SEARCH</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTENT_PASTE_FROM_CLIPBOARD">IDC_CONTENT_PASTE_FROM_CLIPBOARD</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CONTEXT_COMPOSE">IDC_CONTEXT_COMPOSE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_COPY">IDC_COPY</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_COPY_URL">IDC_COPY_URL</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CREATE_NEW_TAB_GROUP">IDC_CREATE_NEW_TAB_GROUP</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CREATE_NEW_TAB_GROUP_TOP_LEVEL">IDC_CREATE_NEW_TAB_GROUP_TOP_LEVEL</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CREATE_SHORTCUT">IDC_CREATE_SHORTCUT</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CUSTOMIZE_CHROME">IDC_CUSTOMIZE_CHROME</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CUSTOMIZE_TOUCH_BAR">IDC_CUSTOMIZE_TOUCH_BAR</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_CUT">IDC_CUT</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEBUG_PRINT_VIEW_TREE">IDC_DEBUG_PRINT_VIEW_TREE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEBUG_PRINT_VIEW_TREE_DETAILS">IDC_DEBUG_PRINT_VIEW_TREE_DETAILS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEBUG_TOGGLE_TABLET_MODE">IDC_DEBUG_TOGGLE_TABLET_MODE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEVELOPER_MENU">IDC_DEVELOPER_MENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEVICE_SYSTEM_TRAY_ICON_FIRST">IDC_DEVICE_SYSTEM_TRAY_ICON_FIRST</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEVICE_SYSTEM_TRAY_ICON_LAST">IDC_DEVICE_SYSTEM_TRAY_ICON_LAST</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEV_TOOLS">IDC_DEV_TOOLS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEV_TOOLS_CONSOLE">IDC_DEV_TOOLS_CONSOLE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEV_TOOLS_DEVICES">IDC_DEV_TOOLS_DEVICES</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEV_TOOLS_INSPECT">IDC_DEV_TOOLS_INSPECT</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DEV_TOOLS_TOGGLE">IDC_DEV_TOOLS_TOGGLE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DISTILL_PAGE">IDC_DISTILL_PAGE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DUPLICATE_TAB">IDC_DUPLICATE_TAB</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_DUPLICATE_TARGET_TAB">IDC_DUPLICATE_TARGET_TAB</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_EDIT_MENU">IDC_EDIT_MENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_EDIT_SEARCH_ENGINES">IDC_EDIT_SEARCH_ENGINES</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
 <tr class="list">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_ELEVATED_RECOVERY_DIALOG">IDC_ELEVATED_RECOVERY_DIALOG</a></td>
+<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_EDIT_SEARCH_ENGINES">IDC_EDIT_SEARCH_ENGINES</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
@@ -4684,182 +4684,162 @@ body { margin: 0.5em; }
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_ROUTER_ALWAYS_SHOW_TOOLBAR_ACTION">IDC_MEDIA_ROUTER_ALWAYS_SHOW_TOOLBAR_ACTION</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_ROUTER_HELP">IDC_MEDIA_ROUTER_HELP</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_ROUTER_LEARN_MORE">IDC_MEDIA_ROUTER_LEARN_MORE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_ROUTER_SHOWN_BY_POLICY">IDC_MEDIA_ROUTER_SHOWN_BY_POLICY</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_ROUTER_SHOW_IN_TOOLBAR">IDC_MEDIA_ROUTER_SHOW_IN_TOOLBAR</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_ROUTER_TOGGLE_MEDIA_REMOTING">IDC_MEDIA_ROUTER_TOGGLE_MEDIA_REMOTING</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_STREAM_DEVICE_ALWAYS_ALLOW">IDC_MEDIA_STREAM_DEVICE_ALWAYS_ALLOW</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
 <tr class="list">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_STREAM_DEVICE_STATUS_TRAY">IDC_MEDIA_STREAM_DEVICE_STATUS_TRAY</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_TOOLBAR_CONTEXT_REPORT_CAST_ISSUE">IDC_MEDIA_TOOLBAR_CONTEXT_REPORT_CAST_ISSUE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MEDIA_TOOLBAR_CONTEXT_SHOW_OTHER_SESSIONS">IDC_MEDIA_TOOLBAR_CONTEXT_SHOW_OTHER_SESSIONS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MIGRATE_LOCAL_CREDIT_CARD_FOR_PAGE">IDC_MIGRATE_LOCAL_CREDIT_CARD_FOR_PAGE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MINIMIZE_WINDOW">IDC_MINIMIZE_WINDOW</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MinimumLabelValue">IDC_MinimumLabelValue</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MORE_TOOLS_MENU">IDC_MORE_TOOLS_MENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MOVE_TAB_NEXT">IDC_MOVE_TAB_NEXT</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MOVE_TAB_PREVIOUS">IDC_MOVE_TAB_PREVIOUS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MOVE_TAB_TO_NEW_WINDOW">IDC_MOVE_TAB_TO_NEW_WINDOW</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MOVE_WINDOW">IDC_MOVE_WINDOW</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_MUTE_TARGET_SITE">IDC_MUTE_TARGET_SITE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_NAME_WINDOW">IDC_NAME_WINDOW</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_NEW_INCOGNITO_WINDOW">IDC_NEW_INCOGNITO_WINDOW</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_NEW_SPLIT_TAB">IDC_NEW_SPLIT_TAB</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_NEW_TAB">IDC_NEW_TAB</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_NEW_TAB_TO_RIGHT">IDC_NEW_TAB_TO_RIGHT</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_NEW_WINDOW">IDC_NEW_WINDOW</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OFFERS_AND_REWARDS_FOR_PAGE">IDC_OFFERS_AND_REWARDS_FOR_PAGE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_ADD_FILE">IDC_OMNIBOX_CONTEXT_ADD_FILE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_ADD_IMAGE">IDC_OMNIBOX_CONTEXT_ADD_IMAGE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_CANVAS">IDC_OMNIBOX_CONTEXT_CANVAS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_CREATE_IMAGES">IDC_OMNIBOX_CONTEXT_CREATE_IMAGES</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_DEEP_RESEARCH">IDC_OMNIBOX_CONTEXT_DEEP_RESEARCH</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_SET_MODEL_AUTO">IDC_OMNIBOX_CONTEXT_SET_MODEL_AUTO</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_SET_MODEL_PRO_NO_GEN_UI">IDC_OMNIBOX_CONTEXT_SET_MODEL_PRO_NO_GEN_UI</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_SET_MODEL_REGULAR">IDC_OMNIBOX_CONTEXT_SET_MODEL_REGULAR</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_SET_MODEL_THINKING">IDC_OMNIBOX_CONTEXT_SET_MODEL_THINKING</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_SHARED_TABS_SUBMENU">IDC_OMNIBOX_CONTEXT_SHARED_TABS_SUBMENU</a></td>
+<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
+<td class="itemdesc"><p>&nbsp;</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_OMNIBOX_CONTEXT_SMART_TAB_SHARING">IDC_OMNIBOX_CONTEXT_SMART_TAB_SHARING</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
@@ -5314,27 +5294,7 @@ body { margin: 0.5em; }
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_SAVE_LOCAL_CARD_SIGN_IN_PROMO_IF_APPLICABLE">IDC_SHOW_SAVE_LOCAL_CARD_SIGN_IN_PROMO_IF_APPLICABLE</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_SEARCH_TOOLS">IDC_SHOW_SEARCH_TOOLS</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_SETTINGS_CHANGE_FIRST">IDC_SHOW_SETTINGS_CHANGE_FIRST</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_SETTINGS_CHANGE_LAST">IDC_SHOW_SETTINGS_CHANGE_LAST</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_SETTINGS_RESET_BUBBLE">IDC_SHOW_SETTINGS_RESET_BUBBLE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
@@ -5349,62 +5309,62 @@ body { margin: 0.5em; }
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
 <tr class="list">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_SRT_BUBBLE">IDC_SHOW_SRT_BUBBLE</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_SYNC_PASSPHRASE_DIALOG">IDC_SHOW_SYNC_PASSPHRASE_DIALOG</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_SYNC_SETTINGS">IDC_SHOW_SYNC_SETTINGS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_TABS_FROM_OTHER_DEVICES_SIDE_PANEL">IDC_SHOW_TABS_FROM_OTHER_DEVICES_SIDE_PANEL</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_TRANSLATE">IDC_SHOW_TRANSLATE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SHOW_TRAVEL">IDC_SHOW_TRAVEL</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SIZE_WINDOW">IDC_SIZE_WINDOW</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SPELLCHECK_ADD_TO_DICTIONARY">IDC_SPELLCHECK_ADD_TO_DICTIONARY</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SPELLCHECK_LANGUAGES_FIRST">IDC_SPELLCHECK_LANGUAGES_FIRST</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SPELLCHECK_LANGUAGES_LAST">IDC_SPELLCHECK_LANGUAGES_LAST</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SPELLCHECK_MENU">IDC_SPELLCHECK_MENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SPELLCHECK_MULTI_LINGUAL">IDC_SPELLCHECK_MULTI_LINGUAL</a></td>
+<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
+<td class="itemdesc"><p>&nbsp;</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SPELLCHECK_REMOVE_FROM_DICTIONARY">IDC_SPELLCHECK_REMOVE_FROM_DICTIONARY</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
@@ -5434,97 +5394,97 @@ body { margin: 0.5em; }
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_SPELLPANEL_TOGGLE">IDC_SPELLPANEL_TOGGLE</a></td>
-<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
-</tr>
-<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_STATUS_TRAY_KEEP_CHROME_RUNNING_IN_BACKGROUND">IDC_STATUS_TRAY_KEEP_CHROME_RUNNING_IN_BACKGROUND</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_STATUS_TRAY_KEEP_CHROME_RUNNING_IN_BACKGROUND_SETTING">IDC_STATUS_TRAY_KEEP_CHROME_RUNNING_IN_BACKGROUND_SETTING</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_STOP">IDC_STOP</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TAB_MENU">IDC_TAB_MENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TAB_SEARCH">IDC_TAB_SEARCH</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TAB_SEARCH_CLOSE">IDC_TAB_SEARCH_CLOSE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TAB_SEARCH_TOGGLE_PIN">IDC_TAB_SEARCH_TOGGLE_PIN</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TAKE_SCREENSHOT">IDC_TAKE_SCREENSHOT</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TASK_MANAGER">IDC_TASK_MANAGER</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TASK_MANAGER_APP_MENU">IDC_TASK_MANAGER_APP_MENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TASK_MANAGER_CONTEXT_MENU">IDC_TASK_MANAGER_CONTEXT_MENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TASK_MANAGER_MAIN_MENU">IDC_TASK_MANAGER_MAIN_MENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TASK_MANAGER_SHORTCUT">IDC_TASK_MANAGER_SHORTCUT</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TOGGLE_FULLSCREEN_TOOLBAR">IDC_TOGGLE_FULLSCREEN_TOOLBAR</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TOGGLE_JAVASCRIPT_APPLE_EVENTS">IDC_TOGGLE_JAVASCRIPT_APPLE_EVENTS</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TOGGLE_MULTITASK_MENU">IDC_TOGGLE_MULTITASK_MENU</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TOGGLE_REQUEST_TABLET_SITE">IDC_TOGGLE_REQUEST_TABLET_SITE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TOGGLE_VERTICAL_TABS">IDC_TOGGLE_VERTICAL_TABS</a></td>
+<td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
+<td class="itemdesc"><p>&nbsp;</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="uCEFConstants.html#IDC_TOGGLE_VERTICAL_TABS_COLLAPSE">IDC_TOGGLE_VERTICAL_TABS_COLLAPSE</a></td>
 <td class="itemunit"><a class="bold" href="uCEFConstants.html">uCEFConstants</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>

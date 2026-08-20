@@ -287,6 +287,7 @@ type
       function  GetExitCode : TCefResultCode;
       function  GetBrowserById(aID : integer) : ICefBrowser;
       function  GetCookiesDir(const aRootDirectory : string) : string;
+      function  GetVersionFull : string;
       {$IFDEF LINUX}
       function  GetXDisplay : PXDisplay;
       function  GetArgc : longint;
@@ -1694,6 +1695,10 @@ type
       /// <para><see href="https://source.chromium.org/chromium/chromium/src/+/main:ui/gl/gl_switches.cc">See the gl_switches.cc file</see></para>
       /// </remarks>
       property UseAngle                          : TCefAngleImplementation                  read FUseAngle                          write FUseAngle;
+      /// <summary>
+      /// Full CEF version information.
+      /// </summary>
+      property VersionFull                       : string                                   read GetVersionFull;
       {$IFDEF LINUX}
       /// <summary>
       /// Return the singleton X11 display shared with Chromium. The display is not
@@ -3444,6 +3449,12 @@ begin
   Result := IncludeTrailingPathDelimiter(Result);
 end;
 
+function TCefApplicationCore.GetVersionFull : string;
+begin
+  if (FStatus = asInitialized) then
+    Result := string(cef_version_full());
+end;
+
 procedure TCefApplicationCore.DeleteCookiesDB(const aRootDirectory : string);
 var
   TempFiles : TStringList;
@@ -4559,9 +4570,11 @@ function TCefApplicationCore.Load_cef_version_info_h : boolean;
 begin
   {$IFDEF FPC}Pointer({$ENDIF}cef_version_info{$IFDEF FPC}){$ENDIF}     := GetProcAddress(FLibHandle, 'cef_version_info');
   {$IFDEF FPC}Pointer({$ENDIF}cef_version_info_all{$IFDEF FPC}){$ENDIF} := GetProcAddress(FLibHandle, 'cef_version_info_all');
+  {$IFDEF FPC}Pointer({$ENDIF}cef_version_full{$IFDEF FPC}){$ENDIF}     := GetProcAddress(FLibHandle, 'cef_version_full');
 
   Result := assigned(cef_version_info) and
-            assigned(cef_version_info_all);
+            assigned(cef_version_info_all) and
+            assigned(cef_version_full);
 end;
 
 function TCefApplicationCore.Load_cef_id_mappers_h : boolean;
