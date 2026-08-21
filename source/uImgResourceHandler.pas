@@ -54,18 +54,21 @@ type
     procedure GetResponseHeaders(const response: ICefResponse;
                                  out responseLength: Int64;
                                  out redirectUrl: ustring); override;
-    function ReadResponse(dataOut: Pointer; bytesToRead: Integer;
-                          out bytesRead: Integer;
-                          const callback: ICefCallback): Boolean; override;
+    function  ReadResponse(const dataOut: Pointer; bytesToRead: Integer;
+       var bytesRead: Integer; const callback: ICefCallback): Boolean; override;
+
     procedure Cancel; override;
   public
-    constructor Create; override;
+     constructor Create(const browser: ICefBrowser; const frame: ICefFrame; const schemeName: ustring; const request: ICefRequest); override;
   end;
 
 function ExtractGuidFromUuidUrl(const AUrl: string; out AGuid: TGUID): Boolean;
 function GuessMimeTypeFromBytes(const ABytes: TBytes): ustring;
 
 implementation
+
+uses
+  uUuidImageApi;
 
 function UrlDecodeSafe(const S: string): string;
 begin
@@ -78,9 +81,8 @@ end;
 
 function ExtractGuidFromUuidUrl(const AUrl: string; out AGuid: TGUID): Boolean;
 var
-  S: string;
+  S, Candidate: string;
   P, Q: Integer;
-  Candidate: string;
 begin
   Result := False;
 
@@ -92,9 +94,11 @@ begin
 
   S := Trim(Copy(S, P + Length('uuid:'), MaxInt));
 
-  // Strip leading slashes/backslashes: uuid:\{...} or uuid://{...}
+  // Strip leading and trailing slashes/backslashes: uuid:\{...} or uuid://{...}/
   while (Length(S) > 0) and ((S[1] = '\') or (S[1] = '/')) do
     Delete(S, 1, 1);
+  while (Length(S) > 0) and ((S[Length(S)] = '\') or (S[Length(S)] = '/')) do
+    Delete(S, Length(S), 1);
 
   // Preferred: {GUID}
   P := Pos('{', S);
@@ -105,10 +109,10 @@ begin
     Exit(TryStrToGUID(Candidate, AGuid));
   end;
 
-  // Fallback: raw GUID maybe with suffix/query/fragment
+  // Fallback: raw GUID maybe with suffix/query/fragment/extension
   Candidate := S;
   for P := 1 to Length(Candidate) do
-    if CharInSet(Candidate[P], ['?', '#', '&']) then
+    if CharInSet(Candidate[P], ['?', '#', '&', '.']) then
     begin
       Candidate := Copy(Candidate, 1, P - 1);
       Break;
@@ -141,6 +145,11 @@ begin
   if (Length(ABytes) >= 2) and
      (ABytes[0] = Ord('B')) and (ABytes[1] = Ord('M')) then
     Exit('image/bmp');
+
+  if (Length(ABytes) >= 4) and
+     (ABytes[0] = Ord('g')) and (ABytes[1] = Ord('l')) and
+     (ABytes[2] = Ord('T')) and (ABytes[3] = Ord('F')) then
+    Exit('model/gltf-binary');
 
   Result := 'application/octet-stream';
 end;
@@ -183,7 +192,15 @@ var
   Item: TUuidImageItem;
 begin
   if not TryStrToGUID(Trim(AGuidText), G) then
-    Exit;
+  begin
+    if not ExtractGuidFromUuidUrl(AGuidText, G) then
+    begin
+      if (Length(Trim(AGuidText)) = 36) and TryStrToGUID('{' + Trim(AGuidText) + '}', G) then
+        // success
+      else
+        Exit;
+    end;
+  end;
   K := NormalizeGuid(G);
 
   Item.Bytes := Copy(ABytes);
@@ -229,7 +246,15 @@ begin
   AItem.Extension := '';
 
   if not TryStrToGUID(Trim(AGuidText), G) then
-    Exit;
+  begin
+    if not ExtractGuidFromUuidUrl(AGuidText, G) then
+    begin
+      if (Length(Trim(AGuidText)) = 36) and TryStrToGUID('{' + Trim(AGuidText) + '}', G) then
+        // success
+      else
+        Exit;
+    end;
+  end;
 
   K := NormalizeGuid(G);
 
@@ -257,7 +282,15 @@ var
   K: string;
 begin
   if not TryStrToGUID(Trim(AGuidText), G) then
-    Exit;
+  begin
+    if not ExtractGuidFromUuidUrl(AGuidText, G) then
+    begin
+      if (Length(Trim(AGuidText)) = 36) and TryStrToGUID('{' + Trim(AGuidText) + '}', G) then
+        // success
+      else
+        Exit;
+    end;
+  end;
   K := NormalizeGuid(G);
 
   TMonitor.Enter(FLock);
@@ -299,9 +332,11 @@ end;
 
 { TImgResourceHandler }
 
-constructor TImgResourceHandler.Create;
+constructor TImgResourceHandler.Create(const browser: ICefBrowser; const frame: ICefFrame;
+  const schemeName: ustring; const request: ICefRequest);
+
 begin
-  inherited Create;
+  inherited Create(browser,frame,schemeName,request);
   FDataPos   := 0;
   FMimeType  := 'application/octet-stream';
   FStatus    := 404;
@@ -344,9 +379,8 @@ begin
   responseLength := Length(FData);
 end;
 
-function TImgResourceHandler.ReadResponse(dataOut: Pointer; bytesToRead: Integer;
-                                          out bytesRead: Integer;
-                                          const callback: ICefCallback): Boolean;
+function TImgResourceHandler.ReadResponse(const dataOut: Pointer; bytesToRead: Integer;
+       var bytesRead: Integer; const callback: ICefCallback): Boolean;
 var
   Remaining, ToCopy: Integer;
 begin

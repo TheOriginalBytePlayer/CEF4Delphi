@@ -17,22 +17,19 @@ function WriteRegisteredImagesToDir(const TargetDirectory: string;
   OverwriteExisting: Boolean = True;
   ClearUUIDsOnSuccess: Boolean = False): Integer;
 
+function TryStrToGUID(const AStr: string; out AValue: TGUID): Boolean;
+function TryGuidFromFileName(const AFileName: string; out AGuid: TGUID; out AExt: string): Boolean;
+
 implementation
 
 uses
   uCEFApplication, uCEFInterfaces, uCEFSchemeHandlerFactory, uCEFBrowser, uCEFRequest,
-  uImgResourceHandler,
-  System.IOUtils, System.StrUtils;
+  uImgResourceHandler, uCEFTypes, System.IOUtils, System.StrUtils,
+  uCEFMiscFunctions;
 
 var
   RegisteredFactory: Boolean;
 
-type
-  TUuidSchemeHandlerFactory = class(TCefSchemeHandlerFactoryOwn)
-  protected
-    function New(const browser: ICefBrowser; const frame: ICefFrame;
-      const schemeName: ustring; const request: ICefRequest): ICefResourceHandler; override;
-  end;
 
 function IsImageExtension(const Ext: string): Boolean;
 var
@@ -41,7 +38,8 @@ begin
   E := LowerCase(Trim(Ext));
   Result := (E = '.webp') or (E = '.png') or (E = '.jpg') or (E = '.jpeg') or
             (E = '.gif') or (E = '.bmp') or (E = '.svg') or (E = '.ico') or
-            (E = '.tif') or (E = '.tiff') or (E = '.avif');
+            (E = '.tif') or (E = '.tiff') or (E = '.avif') or (E = '.glb') or
+            (E = '.gltf');
 end;
 
 function GuessExtensionFromBytes(const ABytes: TBytes): string;
@@ -67,7 +65,29 @@ begin
      (ABytes[0] = Ord('B')) and (ABytes[1] = Ord('M')) then
     Exit('.bmp');
 
+  if (Length(ABytes) >= 4) and
+     (ABytes[0] = Ord('g')) and (ABytes[1] = Ord('l')) and
+     (ABytes[2] = Ord('T')) and (ABytes[3] = Ord('F')) then
+    Exit('.glb');
+
   Result := '.bin';
+end;
+
+function TryStrToGUID(const AStr: string; out AValue: TGUID): Boolean;
+begin
+  Result := True;
+  try
+    if (Length(AStr) = 38) and (AStr[1] = '{') and (AStr[Length(AStr)] = '}') then
+      AValue := StringToGUID(AStr)
+    else if (Length(AStr) = 36) and (AStr[1] <> '{') and (AStr[Length(AStr)] <> '}') then
+      AValue := StringToGUID('{' + AStr + '}')
+    else
+      Result := False;
+  except
+    Result := False;
+  end;
+  if not Result then
+    AValue := TGUID.Empty;
 end;
 
 function TryGuidFromFileName(const AFileName: string; out AGuid: TGUID; out AExt: string): Boolean;
@@ -87,18 +107,16 @@ begin
     AExt := Ext;
     Exit(True);
   end;
+  if (Length(BaseName) = 36) and TryStrToGUID('{' + BaseName + '}', AGuid) then
+  begin
+    AExt := Ext;
+    Exit(True);
+  end;
 end;
 
 procedure RegisterUuidSchemeFactory;
 begin
-  RegisteredFactory := CefRegisterSchemeHandlerFactory('uuid', '', TUuidSchemeHandlerFactory.Create);
-end;
-
-function TUuidSchemeHandlerFactory.New(const browser: ICefBrowser;
-  const frame: ICefFrame; const schemeName: ustring;
-  const request: ICefRequest): ICefResourceHandler;
-begin
-  Result := TImgResourceHandler.Create;
+  RegisteredFactory := CefRegisterSchemeHandlerFactory('uuid', '', TImgResourceHandler);
 end;
 
 procedure RegisterUuidImage(const AGuid: TGUID; const ABytes: TBytes);
@@ -152,6 +170,12 @@ begin
 
   S := Trim(AGuidText);
   if TryStrToGUID(S, G) then
+    Exit(RegisterUuidImageFromFile(G, AFileName));
+
+  if (Length(S) = 36) and TryStrToGUID('{' + S + '}', G) then
+    Exit(RegisterUuidImageFromFile(G, AFileName));
+
+  if ExtractGuidFromUuidUrl(S, G) then
     Exit(RegisterUuidImageFromFile(G, AFileName));
 
   // Intercept: filename is "{guid}.<imageExt>" (GUID part without extension)
