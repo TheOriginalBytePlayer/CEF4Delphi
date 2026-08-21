@@ -13,6 +13,7 @@ procedure UnregisterUuidImage(const AGuid: TGUID); overload;
 procedure UnregisterUuidImage(const AGuidText: string); overload;
 procedure ClearUuidImages;
 
+function RegisterUuidSchemeFactory: Boolean;
 function WriteRegisteredImagesToDir(const TargetDirectory: string;
   OverwriteExisting: Boolean = True;
   ClearUUIDsOnSuccess: Boolean = False): Integer;
@@ -114,9 +115,11 @@ begin
   end;
 end;
 
-procedure RegisterUuidSchemeFactory;
+function RegisterUuidSchemeFactory: Boolean;
 begin
-  RegisteredFactory := CefRegisterSchemeHandlerFactory('uuid', '', TImgResourceHandler);
+  if not RegisteredFactory then
+    RegisteredFactory := CefRegisterSchemeHandlerFactory('uuid', '', TImgResourceHandler);
+  Result := RegisteredFactory;
 end;
 
 procedure RegisterUuidImage(const AGuid: TGUID; const ABytes: TBytes);
