@@ -81,18 +81,45 @@ end;
 
 function ExtractGuidFromUuidUrl(const AUrl: string; out AGuid: TGUID): Boolean;
 var
-  S, Candidate: string;
+  S, Candidate, NoExtCandidate: string;
   P, Q: Integer;
 begin
   Result := False;
+  AGuid := TGUID.Empty;
 
   // Decode and normalize
   S := Trim(UrlDecodeSafe(AUrl));
-  S := StringReplace(S, '/', '\', [rfReplaceAll]); // allow uuid:/ and uuid:\
-  P := Pos('uuid:', LowerCase(S));
-  if P <= 0 then Exit(False);
+  if S = '' then Exit(False);
 
-  S := Trim(Copy(S, P + Length('uuid:'), MaxInt));
+  // Strip known prefix schemes or path roots
+  P := Pos('uuid:', LowerCase(S));
+  if P > 0 then
+    S := Trim(Copy(S, P + Length('uuid:'), MaxInt))
+  else
+  begin
+    P := Pos('/api/storage/', LowerCase(S));
+    if P > 0 then
+      S := Trim(Copy(S, P + Length('/api/storage/'), MaxInt))
+    else
+    begin
+      P := Pos('\api\storage\', LowerCase(S));
+      if P > 0 then
+        S := Trim(Copy(S, P + Length('\api\storage\'), MaxInt))
+      else
+      begin
+        P := Pos('app-img://', LowerCase(S));
+        if P > 0 then
+        begin
+          S := Trim(Copy(S, P + Length('app-img://'), MaxInt));
+          if Pos('/', S) > 0 then
+            S := Copy(S, LastDelimiter('/', S) + 1, MaxInt);
+        end;
+      end;
+    end;
+  end;
+
+  // Normalize slashes
+  S := StringReplace(S, '/', '\', [rfReplaceAll]);
 
   // Strip leading and trailing slashes/backslashes: uuid:\{...} or uuid://{...}/
   while (Length(S) > 0) and ((S[1] = '\') or (S[1] = '/')) do
@@ -106,21 +133,31 @@ begin
   if (P > 0) and (Q > P) then
   begin
     Candidate := Copy(S, P, Q - P + 1);
-    Exit(TryStrToGUID(Candidate, AGuid));
+    if TryStrToGUID(Candidate, AGuid) then
+      Exit(True);
   end;
 
   // Fallback: raw GUID maybe with suffix/query/fragment/extension
   Candidate := S;
   for P := 1 to Length(Candidate) do
-    if CharInSet(Candidate[P], ['?', '#', '&', '.']) then
+    if CharInSet(Candidate[P], ['?', '#', '&']) then
     begin
       Candidate := Copy(Candidate, 1, P - 1);
       Break;
     end;
   Candidate := Trim(Candidate);
 
+  // Check raw candidate first
   if TryStrToGUID(Candidate, AGuid) then Exit(True);
   if (Length(Candidate) = 36) and TryStrToGUID('{' + Candidate + '}', AGuid) then Exit(True);
+
+  // If candidate contains an extension (e.g. .webp, .png, .jpg), try stripping extension
+  if Pos('.', Candidate) > 0 then
+  begin
+    NoExtCandidate := Trim(ChangeFileExt(Candidate, ''));
+    if TryStrToGUID(NoExtCandidate, AGuid) then Exit(True);
+    if (Length(NoExtCandidate) = 36) and TryStrToGUID('{' + NoExtCandidate + '}', AGuid) then Exit(True);
+  end;
 end;
 
 function GuessMimeTypeFromBytes(const ABytes: TBytes): ustring;
